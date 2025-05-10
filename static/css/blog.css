@@ -1,0 +1,328 @@
+/*
+* CSS adaptado al Manual de Marca de Serving Consultores - Área Personas
+* Basado en el Manual de Identidad de Marca 2025
+*/
+
+/* Importación de tipografías corporativas */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;400i;700&display=swap');
+
+/* Tipografías base según manual */
+body {
+  font-family: 'Lato', 'Calibri', 'Arial', sans-serif; /* Tipografía secundaria para cuerpos de texto */
+  font-size: 16px; /* Tamaño aumentado para mejor legibilidad */
+  color: #333333; /* Equivalente al Negro 90% mencionado en el manual */
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* ENCABEZADO PRINCIPAL */
+.blog-header {
+  background-color: #004987; /* Azul Serving - color principal corporativo */
+  color: #ffffff;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.blog-header-logo {
+  font-family: 'Montserrat', sans-serif; /* Tipografía principal según manual */
+  font-size: 2rem; /* 20-24pt según jerarquía tipográfica */
+  font-weight: 700; /* Bold según manual */
+  text-decoration: none;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.blog-header-logo:hover {
+  color: #8EC441; /* Verde Personas - color principal corporativo */
+  transition: color 0.3s ease;
+}
+
+/* TÍTULOS según jerarquía tipográfica del manual */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  color: #004987; /* Azul Serving para títulos según manual */
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 32px; /* Aumentado desde 24px para mejor legibilidad */
+  font-weight: 700; /* Bold */
+}
+
+h2 {
+  font-size: 28px; /* Aumentado desde 20px */
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 24px; /* Aumentado desde 18px */
+  font-weight: 600; /* SemiBold */
+  color: #8EC441; /* Verde Personas para subtítulos según manual */
+}
+
+h4 {
+  font-size: 20px; /* Aumentado desde 16px */
+  font-weight: 600;
+  color: #8A8C8E; /* Gris Técnico para subtítulos según manual */
+}
+
+h5, h6 {
+  font-size: 18px; /* Aumentado desde 14px */
+  font-weight: 400; /* Regular */
+}
+
+/* TITULAR DESTACADO */
+.display-4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #004987;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .display-4 {
+    font-size: 3rem;
+  }
+}
+
+/* PUBLICACIONES */
+.blog-post {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  max-width: 800px;
+  border-bottom: 2px solid #f4f4f4;
+}
+
+.blog-post-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600; /* SemiBold según manual */
+  color: #004987; /* Azul Serving */
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-meta {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.1rem; /* Aumentado desde 0.9rem */
+  font-weight: 400; /* Cambiado a Regular para mejor legibilidad */
+  color: #8A8C8E; /* Gris Técnico según manual */
+  margin-bottom: 1.5rem;
+}
+
+/* Elementos destacados */
+.blog-post-content p strong {
+  color: #004987; /* Azul Serving para destacados */
+}
+
+/* Enlaces */
+a {
+  color: #56B4E9; /* Azul Claro - color secundario según manual */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #8EC441; /* Verde Personas */
+  text-decoration: underline;
+}
+
+/* PIE DE PÁGINA */
+.blog-footer {
+  background-color: #f4f4f4;
+  color: #004987; /* Azul Serving */
+  text-align: center;
+  padding: 2rem;
+  border-top: 3px solid #8EC441; /* Verde Personas - línea separadora según manual */
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+}
+
+.blog-footer p:last-child {
+  margin-bottom: 0;
+}
+
+/* Destaque en footer */
+.footer-contact {
+  font-weight: 700;
+  color: #8A8C8E; /* Gris Técnico */
+}
+
+/* PAGINACIÓN */
+.blog-pagination {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.blog-pagination a {
+  color: #004987; /* Azul Serving */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; /* SemiBold según manual */
+  text-decoration: none;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #004987;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.blog-pagination a:hover {
+  background-color: #8EC441; /* Verde Personas */
+  border-color: #8EC441;
+  color: white;
+}
+
+.blog-pagination a.disabled {
+  color: #8A8C8E; /* Gris Técnico */
+  border-color: #e9ecef;
+  pointer-events: none;
+}
+
+/* CLASES AUXILIARES */
+.h-250 { height: 250px; }
+@media (min-width: 768px) {
+  .h-md-250 { height: 250px; }
+}
+
+.flex-auto {
+  flex: 0 0 auto;
+}
+
+/* BOTONES LOGIN Y REGISTER */
+.btn-warning {
+  background-color: var(--verde-serving);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+  background-color: #7ba619;
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  border: 2px solid var(--verde-serving);
+  color: var(--verde-serving);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--verde-serving);
+  color: #fff;
+}
+
+/* Elementos adicionales según manual */
+
+/* Cajas destacadas */
+.highlight-box {
+  background-color: #f9f9f9;
+  border-left: 4px solid #8EC441; /* Verde Personas */
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* Listas */
+ul li, ol li {
+  margin-bottom: 0.5rem;
+  text-align: justify;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+table thead {
+  background-color: #004987; /* Azul Serving */
+  color: white;
+}
+
+table th, table td {
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* Botones según paleta corporativa */
+.btn-primary {
+  background-color: #004987; /* Azul Serving */
+  border-color: #004987;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #003e73; /* Variación más oscura del Azul Serving */
+  border-color: #003e73;
+}
+
+.btn-secondary {
+  background-color: #8EC441; /* Verde Personas */
+  border-color: #8EC441;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #7db039; /* Variación más oscura del Verde Personas */
+  border-color: #7db039;
+}
+
+/* Citas */
+blockquote {
+  border-left: 4px solid #B2DB79; /* Verde Lima - color secundario */
+  padding-left: 1rem;
+  font-style: italic;
+  color: #8A8C8E; /* Gris Técnico */
+  margin: 1.5rem 0;
+}
+
+/* Imágenes acordes al estilo fotográfico */
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+/* Adaptar texto para dispositivos móviles */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Mantenemos el tamaño legible incluso en móvil */
+  }
+
+  .blog-post {
+    padding: 1rem;
+  }
+
+  .blog-post-title {
+    font-size: 1.75rem; /* Aumentado para mantener legibilidad */
+  }
+}
