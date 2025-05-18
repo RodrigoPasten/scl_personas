@@ -6,143 +6,256 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCL - Área Personas</title>
+
+    <!-- Fuentes y estilos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
-  </head>
+</head>
 <body>
+    <!-- Navbar -->
+    <header class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #0a2e73, #174b9c, #2e70c9); padding: 1rem;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="{% static 'images/logo_scl.jpg' %}" alt="Logo" width="120" class="mr-2">
+                <span class="font-weight-bold">Área Personas</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                <div class="d-flex align-items-center">
+                    <span class="text-white mr-3">Hola, Rodrigo</span>
+                    <a href="#" class="btn btn-success btn-sm">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categorías -->
+    <div class="nav-scroller py-2 mb-3 bg-light border-bottom">
+        <div class="container">
+            <nav class="nav d-flex justify-content-start">
+                {% for cat in categories %}
+                <a class="p-2 text-muted" href="#">{{ cat }}</a>
+                {% endfor %}
+            </nav>
+        </div>
+    </div>
+
+  <!-- Post Principal Mejorado (Hero Section) -->
+<section class="hero-section mb-5">
     <div class="container">
-     <header class="navbar navbar-expand-lg navbar-dark" style="padding: 1rem; background: linear-gradient(to right, #0a2e73, #174b9c, #2e70c9);">
-
-
-
-  <div class="container">
-    <!-- Logo y nombre -->
-    <a class="navbar-brand d-flex align-items-center" href="#">
-      <img src="static/images/logo_scl.jpg" alt="Logo" width="200" height="150" class="mr-2">
-      <span class="font-weight-bold">Serving Consultores - Área Personas</span>
-    </a>
-
-    <!-- Botón para colapsar en móvil -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Saludo y botón cerrar sesión -->
-    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
-      <div class="d-flex align-items-center">
-        <span class="text-white mr-3">Hola, Rodrigo</span>
-        <a href="#" class="btn btn-success btn-sm">Cerrar sesión</a>
-      </div>
+        {% for post in featured_post %}
+            {% if forloop.last %}
+            <div class="hero-post">
+                <div class="hero-image-container" style="background-image: url('{{ post.featured_image.url }}');">
+                    <div class="hero-overlay"></div>
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center">
+                            <div class="col-lg-8 col-md-10">
+                                <div class="hero-content">
+                                    <span class="hero-category">{{ post.category }}</span>
+                                    <h1 class="hero-title">{{ post.title }}</h1>
+                                    <p class="hero-description">{{ post.short_description }}</p>
+                                    <div class="hero-meta">
+                                        <span class="hero-date"><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j F, Y" }}</span>
+                                    </div>
+                                    <a href="{{ post.get_absolute_url }}" class="hero-button">
+                                        Leer artículo completo
+                                        <i class="fas fa-long-arrow-alt-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
     </div>
-  </div>
-</header>
+</section>
 
+<!-- Publicaciones Destacadas Mejoradas -->
+<section class="featured-posts-section mb-5">
+    <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+            <h3 class="section-title position-relative d-inline-block">
+                Publicaciones Destacadas
+                <div class="section-underline"></div>
+            </h3>
+            <a href="#" class="view-all-link">Ver todas <i class="fas fa-angle-right ml-1"></i></a>
+        </div>
 
-
-
-      <div class="nav-scroller py-1 mb-2">
-
-        <nav class="nav d-flex justify-content-between">
-          {% for cat in categories %}
-          <a class="p-2 text-muted" href="#">{{cat}}</a>
-          {% endfor %}
-        </nav>
-
-
-
-{% for post in featured_post %}
-    {% if forloop.last %}
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark"
-         style="background-image: url('{{ post.featured_image.url }}'); background-blend-mode: overlay; background-size: cover;">
-        <div class="col-md-8 px-0">
-            <h1 class="display-4 font-italic">{{ post.title }}</h1>
-            <p class="lead my-3">{{ post.short_description }}</p>
-            <p class="lead mb-0">
-                <a href="#" class="text-white font-weight-bold">Continue leyendo...</a>
-            </p>
+        <div class="row">
+            {% for post in featured_post %}
+                {% if not forloop.last %}
+                <div class="col-lg-6 mb-4">
+                    <div class="featured-post-card">
+                        <div class="row no-gutters">
+                            <div class="col-md-5">
+                                <div class="featured-post-image">
+                                    {% if post.featured_image %}
+                                    <img src="{{ post.featured_image.url }}" alt="Imagen de {{ post.title }}">
+                                    {% endif %}
+                                    <div class="featured-post-category">
+                                        <span>{{ post.category }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="featured-post-content">
+                                    <h4 class="featured-post-title">{{ post.title }}</h4>
+                                    <div class="featured-post-meta">
+                                        <span><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j F, Y" }}</span>
+                                    </div>
+                                    <p class="featured-post-excerpt">{{ post.short_description|truncatewords:15 }}</p>
+                                    <a href="{{ post.get_absolute_url }}" class="featured-post-link">
+                                        Leer más <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
-    {% endif %}
-{% endfor %}
+</section>
 
-<div class="row mb-2">
-<h3 class="my-4 border-bottom pb-2">Publicaciones destacadas</h3>
-<div class="row mb-2">
-  {% for post in featured_post %}
-    {% if not forloop.last %}
-    <div class="col-md-6 mb-4">
-      <div class="card h-100 shadow-sm rounded-3">
-        {% if post.featured_image %}
-          <img src="{{ post.featured_image.url }}" class="card-img-top rounded-top-3" alt="Imagen de {{ post.title }}">
-        {% endif %}
-        <div class="card-body d-flex flex-column">
-          <h4 class="card-title">{{ post.title }}</h4>
-          <small class="mb-2 text-muted">{{ post.created_at }} |  {{post.category}} </small>
 
-          <p class="card-text flex-grow-1">{{ post.short_description | truncatewords:25 }}</p>
-          <a href="{{ post.get_absolute_url }}" class="btn btn-primary mt-auto align-self-start">Leer más</a>
+       <section class="recent-posts-section my-5">
+    <div class="container">
+        <div class="section-header mb-4">
+            <h3 class="section-title position-relative d-inline-block">
+                Publicaciones Recientes
+                <div class="section-underline"></div>
+            </h3>
         </div>
-      </div>
+
+        <div class="row">
+            {% for p in post %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="post-card h-100">
+                    {% if p.featured_image %}
+                    <div class="post-image-container">
+                        <img src="{{ p.featured_image.url }}" class="post-image" alt="Imagen de {{ p.title }}">
+                        <div class="post-date">
+                            <span class="date-day">{{ p.created_at|date:"d" }}</span>
+                            <span class="date-month">{{ p.created_at|date:"M" }}</span>
+                            <span class="date-month">{{ p.created_at|date:"Y" }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="post-content">
+                        <div class="post-category">
+                            <span class="tag-categoria">{{ p.category }}</span>
+                        </div>
+                        <h4 class="post-title">{{ p.title }}</h4>
+                        <p class="post-excerpt">{{ p.short_description }}</p>
+                        <div class="post-meta">
+                            <div class="post-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>{{ p.created_at|date:"j, F, Y" }}</span>
+                            </div>
+                        </div>
+                        <a href="{{ p.get_absolute_url }}" class="post-read-more">
+                            Leer más <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination-container mt-5">
+            <nav aria-label="Navegación de páginas">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if not prev_page %}disabled{% endif %}">
+                        <a class="page-link" href="#" aria-label="Anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Siguiente">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
-    {% endif %}
-  {% endfor %}
+</section>
+       <!-- Sección de redes sociales mejorada -->
+<div class="social-section py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto text-center">
+                <h4 class="mb-4 position-relative d-inline-block">
+                    <span class="social-title">Síguenos</span>
+                    <div class="title-underline"></div>
+                </h4>
+
+                <div class="social-links d-flex justify-content-center">
+                    <a href="#" class="social-link mx-2" aria-label="GitHub">
+                        <div class="social-icon-container">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <span class="social-name">GitHub</span>
+                    </a>
+                    <a href="#" class="social-link mx-2" aria-label="LinkedIn">
+                        <div class="social-icon-container">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <span class="social-name">LinkedIn</span>
+                    </a>
+                    <a href="#" class="social-link mx-2" aria-label="Twitter">
+                        <div class="social-icon-container">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <span class="social-name">Twitter</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-</div>
-
-<h3 class="my-4 border-bottom pb-1">Publicaciones Recientes</h3>
-  <main role="main" class="container p-0">
-    <div class="row">
-      <div class="col-md-9 blog-main">
-{% for p in post %}
-        <div class="blog-post">
-          <h6 class="blog-post-title">{{p.title}}</h6>
-            <p class="blog-post-meta">{{ p.created_at }} </p>
-            <p class="tag">{{ p.category }}</p>
-            <img src="{{ p.featured_image.url }}" class="card-img-top rounded-top-5" alt="Imagen de {{ p.title }}">
-
-
-          <h6>{{p.short_description}}</h6>
-
-          <p>{{p.blog_body | truncatewords:20}}</p>
-
-
+<!-- Footer moderno -->
+<footer class="footer py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="footer-brand">
+                    <i class="fas fa-book-open logo-icon"></i>
+                    <span class="ms-2">Plataforma Informativa</span>
+                </div>
+            </div>
+            <div class="col-md-4 text-center py-3 py-md-0">
+                <p class="mb-0">Creado con <i class="fas fa-heart pulse"></i> por
+                    <a href="#" class="creator-link">Rodrigo Pastén Cortés</a>
+                </p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <div class="footer-links">
+                    <a href="#" class="me-3">Términos</a>
+                    <a href="#" class="me-3">Privacidad</a>
+                    <a href="#">Contacto</a>
+                </div>
+            </div>
         </div>
-{% endfor %}
-        <!-- /.blog-post -->
-
-      </div>
-      <!-- /.blog-main -->
-
-      <aside class="col-md-3 blog-sidebar">
-        <div class="p-3 mb-3 bg-light rounded">
-          <h4 class="font-italic">About</h4>
-          <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-        </div>
-
-        <div class="p-3">
-          <h4 class="font-italic">Follow Us</h4>
-          <ol class="list-unstyled">
-            <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
-            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-
-          </ol>
-        </div>
-      </aside><!-- /.blog-sidebar -->
-
-    </div><!-- /.row -->
-
-  </main><!-- /.container -->
-
-</div>
-<footer class="blog-footer">
-  <p><i class="fas fa-book-open"></i> Plataforma informativa creada por <a href="#">Rodrigo Pastén Cortés</a></p>
+    </div>
 </footer>
 
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

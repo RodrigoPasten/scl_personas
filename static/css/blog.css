@@ -1,93 +1,58 @@
-/*
-* CSS adaptado al Manual de Marca de Serving Consultores - Área Personas
-* Basado en el Manual de Identidad de Marca 2025
-*/
-
-/* Importación de tipografías corporativas */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;400i;700&display=swap');
-
 :root {
   --verde-serving: #8EC441;
   --azul-serving: #004987;
   --gris-tecnico: #8A8C8E;
   --lima-secundario: #B2DB79;
+  --blanco: #ffffff;
+  --negro: #333333;
 }
 
-/* Tipografías base según manual */
 body {
-  font-family: 'Lato', 'Calibri', 'Arial', sans-serif; /* Tipografía secundaria para cuerpos de texto */
-  font-size: 16px; /* Tamaño aumentado para mejor legibilidad */
-  color: #333333;
-  background-color: #ffffff;
+  font-family: 'Lato', 'Calibri', 'Arial', sans-serif;
+  font-size: 1rem;
+  color: var(--negro);
+  background-color: var(--blanco);
   margin: 0;
   padding: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* ENCABEZADO PRINCIPAL */
-.header {
-  background: linear-gradient(135deg, #304987 0%, #9077b6 50%, #00b4d8 100%);
-  color: #ffffff;
-  padding: 2rem 1rem;
-  text-align: center;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-
-}
-
-
-.blog-header-logo {
-  font-family: 'Montserrat', sans-serif; /* Tipografía principal según manual */
-  font-size: 2rem; /* 20-24pt según jerarquía tipográfica */
-  font-weight: 700; /* Bold según manual */
-  text-decoration: none;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-}
-
-.blog-header-logo:hover {
-  color: #8EC441; /* Verde Personas - color principal corporativo */
-  transition: color 0.3s ease;
-}
-
-/* TÍTULOS según jerarquía tipográfica del manual */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
-  color: #004987; /* Azul Serving para títulos según manual */
   margin-top: 1.5rem;
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 h1 {
-  font-size: 32px; /* Aumentado desde 24px para mejor legibilidad */
-  font-weight: 700; /* Bold */
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blanco);
 }
 
 h2 {
-  font-size: 28px; /* Aumentado desde 20px */
+  font-size: 1.75rem;
   font-weight: 700;
+  color: var(--azul-serving);
 }
 
 h3 {
-  font-size: 24px; /* Aumentado desde 18px */
-  font-weight: 600; /* SemiBold */
-  color: #8EC441; /* Verde Personas para subtítulos según manual */
-  padding: 30px
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--verde-serving);
 }
 
 h4 {
-  font-size: 20px; /* Aumentado desde 16px */
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #004987;
+  color: var(--azul-serving);
 }
 
 h5, h6 {
-  font-size: 18px; /* Aumentado desde 14px */
-  font-weight: 400; /* Regular */
-  color: #8A8C8E;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--gris-tecnico);
 }
-/* NAV */
 
 .nav a {
   border: 1px solid transparent;
@@ -95,215 +60,561 @@ h5, h6 {
   padding: 0.4rem 0.8rem;
   margin: 0 0.4rem;
   font-weight: 600;
-
+  color: var(--azul-serving);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav a:hover {
   background-color: #f8f9fa;
-  border-color: --verde-serving;
+  border-color: var(--verde-serving);
+  color: var(--verde-serving);
 }
 
-/* TITULAR DESTACADO */
-.display-4 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.1rem;
-  font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
-
-}
-
-@media (min-width: 768px) {
-  .display-4 {
-    font-size: 3rem;
-  }
-}
-
-/* PUBLICACIONES */
-
-.card {
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-}
-.blog-post {
-  margin: 1rem auto;
-  padding: 1rem;
-  max-width: 900px;
-  border-bottom: 1px solid #f4f4f4;
-}
 .btn {
-  border-radius: 50px;
+  border-radius: 8px;
   font-weight: 600;
-  padding: 0.5rem 1.25rem;
-  transition: all 0.3s ease;
-}
-
-.btn-warning {
-  background-color: #FFC107;
-  border: none;
-  color: #fff;
-}
-
-.btn-outline-secondary:hover {
-  background-color: #8EC441;
-  color: white;
-  border-color: #8EC441;
-}
-
-.blog-post-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 600; /* SemiBold según manual */
-  color: #004987; /* Azul Serving */
-  margin-bottom: 0.3rem;
-}
-
-.blog-post-meta {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.1rem; /* Aumentado desde 0.9rem */
-  font-weight: 400; /* Cambiado a Regular para mejor legibilidad */
-  color: #8A8C8E; /* Gris Técnico según manual */
-  margin-bottom: 1.5rem;
-}
-
-/* Elementos destacados */
-.blog-post-content p strong {
-  color: #004987; /* Azul Serving para destacados */
-}
-
-
-/* Enlaces */
-a {
-  color: #56B4E9; /* Azul Claro - color secundario según manual */
-  text-decoration: none;
-  transition: color 0.5s ease;
-}
-
-a:hover {
-  color: #8EC441; /* Verde Personas */
-  text-decoration: underline;
-}
-
-/* PIE DE PÁGINA */
-.blog-footer {
-  background-color: #f4f4f4;
-  color: #004987; /* Azul Serving */
-  text-align: center;
-  padding: 2rem;
-  border-top: 3px solid #8EC441; /* Verde Personas - línea separadora según manual */
-  font-family: 'Lato', sans-serif;
-  font-size: 0.9rem;
-}
-
-.blog-footer p:last-child {
-  margin-bottom: 0;
-}
-
-/* Destaque en footer */
-.footer-contact {
-  font-weight: 700;
-  color: #8A8C8E; /* Gris Técnico */
-}
-.blog-footer {
-  background: linear-gradient(to right, #f4f4f4, #e9ecef);
-  border-top: 3px solid #8EC441;
-  font-size: 0.95rem;
-}
-
-/* PAGINACIÓN */
-.blog-pagination {
-  display: flex;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.blog-pagination a {
-  color: #004987; /* Azul Serving */
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600; /* SemiBold según manual */
-  text-decoration: none;
-  margin: 0 0.5rem;
   padding: 0.5rem 1rem;
-  border: 2px solid #004987;
-  border-radius: 4px;
   transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
 }
 
-.blog-pagination a:hover {
-  background-color: #8EC441; /* Verde Personas */
-  border-color: #8EC441;
-  color: white;
+.btn-primary {
+  background-color: var(--azul-serving);
+  border: none;
+  color: var(--blanco);
 }
 
-.blog-pagination a.disabled {
-  color: #8A8C8E; /* Gris Técnico */
-  border-color: #e9ecef;
-  pointer-events: none;
+.btn-primary:hover {
+  background-color: #003e73;
 }
 
-/* CLASES AUXILIARES */
-.h-250 { height: 250px; }
-@media (min-width: 768px) {
-  .h-md-250 { height: 250px; }
-}
-
-.flex-auto {
-  flex: 0 0 auto;
-}
-
-/* BOTONES LOGIN Y REGISTER */
-.btn-warning {
+.btn-secondary {
   background-color: var(--verde-serving);
   border: none;
-  color: #fff;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+  color: var(--blanco);
 }
 
-.btn-warning:hover {
-  background-color: #7ba619;
-  color: #fff;
+.btn-secondary:hover {
+  background-color: #7db039;
 }
 
 .btn-outline-secondary {
+  background-color: transparent;
   border: 2px solid var(--verde-serving);
   color: var(--verde-serving);
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
 }
 
 .btn-outline-secondary:hover {
   background-color: var(--verde-serving);
-  color: #fff;
+  color: var(--blanco);
+}
+/* Estilos para el Post Principal (Hero Section) */
+.hero-section {
+    margin-top: 2rem;
 }
 
-/* Elementos adicionales según manual */
-
-/* Cajas destacadas */
-.highlight-box {
-  background-color: #f9f9f9;
-  border-left: 4px solid #8EC441; /* Verde Personas */
-  padding: 1rem;
-  margin: 1.5rem 0;
+.hero-post {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Listas */
-ul li, ol li {
-  margin-bottom: 0.5rem;
-  text-align: justify;
+.hero-image-container {
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
-/* Tablas */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 73, 135, 0.85) 0%, rgba(0, 73, 135, 0.6) 100%);
+}
+
+.hero-content {
+    padding: 2rem 0;
+    z-index: 10;
+}
+
+.hero-category {
+    display: inline-block;
+    background-color: var(--verde-serving);
+    color: var(--blanco);
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-title {
+    color: var(--blanco);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-description {
+    color: var(--blanco);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    max-width: 90%;
+    line-height: 1.6;
+}
+
+.hero-meta {
+    color: var(--blanco);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.hero-meta i {
+    margin-right: 0.5rem;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--verde-serving);
+    color: var(--blanco);
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hero-button:hover {
+    background-color: #7db039;
+    color: var(--blanco);
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.hero-button i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.hero-button:hover i {
+    transform: translateX(5px);
+}
+
+/* Estilos para las Publicaciones Destacadas */
+.featured-posts-section {
+    padding: 2rem 0;
+}
+
+.view-all-link {
+    color: var(--azul-serving);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.view-all-link:hover {
+    color: var(--verde-serving);
+    text-decoration: none;
+}
+
+.view-all-link i {
+    transition: transform 0.3s ease;
+}
+
+.view-all-link:hover i {
+    transform: translateX(3px);
+}
+
+.featured-post-card {
+    background-color: var(--blanco);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.featured-post-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.featured-post-image {
+    position: relative;
+    height: 100%;
+    min-height: 220px;
+    overflow: hidden;
+}
+
+.featured-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-post-card:hover .featured-post-image img {
+    transform: scale(1.05);
+}
+
+.featured-post-category {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    z-index: 1;
+}
+
+.featured-post-category span {
+    background-color: var(--verde-serving);
+    color: var(--blanco);
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.featured-post-content {
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-post-title {
+    color: var(--azul-serving);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.featured-post-card:hover .featured-post-title {
+    color: var(--verde-serving);
+}
+
+.featured-post-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--gris-tecnico);
+    font-size: 0.85rem;
+}
+
+.featured-post-meta i {
+    margin-right: 0.4rem;
+    color: var(--verde-serving);
+}
+
+.featured-post-excerpt {
+    color: var(--gris-tecnico);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.featured-post-link {
+    align-self: flex-start;
+    color: var(--azul-serving);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.featured-post-link:hover {
+    color: var(--verde-serving);
+    text-decoration: none;
+}
+
+.featured-post-link i {
+    margin-left: 0.4rem;
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+
+.featured-post-link:hover i {
+    transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-image-container {
+        height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-image-container {
+        height: 400px;
+    }
+
+    .hero-content {
+        padding: 2rem 0;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .featured-post-image {
+        min-height: 180px;
+    }
+}
+
+/* Estilos para la sección de publicaciones recientes */
+
+/* Estilo para el encabezado de sección */
+.section-title {
+    color: var(--azul-serving);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.section-underline {
+    height: 3px;
+    width: 60%;
+    background-color: var(--verde-serving);
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    border-radius: 10px;
+}
+
+/* Tarjetas de publicaciones */
+.post-card {
+    background-color: var(--blanco);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.post-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.post-image-container {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.post-card:hover .post-image {
+    transform: scale(1.05);
+}
+
+.post-date {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--azul-serving);
+    color: var(--blanco);
+    border-radius: 8px;
+    padding: 0.5rem;
+    text-align: center;
+    min-width: 60px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.date-day {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.date-month {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.post-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.post-category {
+    margin-bottom: 0.75rem;
+}
+
+.tag-categoria {
+    display: inline-block;
+    background-color: var(--verde-serving);
+    color: var(--blanco);
+    padding: 0.3rem 0.75rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease;
+}
+
+.tag-categoria:hover {
+    background-color: #7db039;
+}
+
+.post-title {
+    color: var(--azul-serving);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.post-card:hover .post-title {
+    color: var(--verde-serving);
+}
+
+.post-excerpt {
+    color: var(--gris-tecnico);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: var(--gris-tecnico);
+    font-size: 0.85rem;
+}
+
+.post-meta-item {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.post-meta-item i {
+    margin-right: 0.4rem;
+    color: var(--verde-serving);
+}
+
+.post-read-more {
+    display: inline-flex;
+    align-items: center;
+    color: var(--azul-serving);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    border-top: 1px solid #eee;
+    width: 100%;
+}
+
+.post-read-more i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.post-read-more:hover {
+    color: var(--verde-serving);
+    text-decoration: none;
+}
+
+.post-read-more:hover i {
+    transform: translateX(5px);
+}
+
+/* Estilos para la paginación */
+.pagination-container {
+    margin-top: 2rem;
+}
+
+.pagination .page-link {
+    border: none;
+    color: var(--azul-serving);
+    margin: 0 0.25rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: #f0f0f0;
+    color: var(--verde-serving);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--azul-serving);
+    color: var(--blanco);
+}
+
+.pagination .page-item.disabled .page-link {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .post-image-container {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .post-content {
+        padding: 1.25rem;
+    }
+}
+
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -311,8 +622,8 @@ table {
 }
 
 table thead {
-  background-color: #004987; /* Azul Serving */
-  color: white;
+  background-color: var(--azul-serving);
+  color: var(--blanco);
 }
 
 table th, table td {
@@ -324,74 +635,9 @@ table tbody tr:nth-child(even) {
   background-color: #f8f9fa;
 }
 
-/* Botones según paleta corporativa */
-.btn-primary {
-  background-color: #004987; /* Azul Serving */
-  border-color: #004987;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #003e73; /* Variación más oscura del Azul Serving */
-  border-color: #003e73;
-}
-
-.btn-secondary {
-  background-color: #8EC441; /* Verde Personas */
-  border-color: #8EC441;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background-color: #7db039; /* Variación más oscura del Verde Personas */
-  border-color: #7db039;
-}
-
-/* Citas */
-blockquote {
-  border-left: 4px solid #B2DB79; /* Verde Lima - color secundario */
-  padding-left: 1rem;
-  font-style: italic;
-  color: #8A8C8E; /* Gris Técnico */
-  margin: 1.5rem 0;
-}
-
-/* Imágenes acordes al estilo fotográfico */
-.blog-post img {
-  max-width: 100%;
-
-  margin: 1.2rem 0;
-  border-radius: 35px;
-  align-items: center;
-  display: flex;
-}
-.tag{
-  color: #004987;
-  background-color: #f9f9f9;
-  border-left: 4px solid #8EC441; /* Verde Personas */
-  border-bottom: 2px solid #8EC441;
-  width: 30%;
-  border-radius: 10px;
-  box-shadow: 0px 2px 12px 2px rgba(0, 0, 0, 0.2);
-  margin-bottom: 2rem;
-  text-align: center;
-}
-border
-}
-/* Adaptar texto para dispositivos móviles */
 @media (max-width: 768px) {
   body {
-    font-size: 16px; /* Mantenemos el tamaño legible incluso en móvil */
+    font-size: 0.9rem;
   }
 
   .blog-post {
@@ -399,76 +645,198 @@ border
   }
 
   .blog-post-title {
-    font-size: 1.75rem; /* Aumentado para mantener legibilidad */
+    font-size: 1.5rem;
   }
 }
-.card h3:hover {
-  color: #004987;
-  text-decoration: underline;
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
-.blog-sidebar .p-3 {
-  background-color: #f9f9f9;
-  border-left: 4px solid #8EC441; /* Verde Personas */
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
+.tag-categoria {
+  display: inline-block;
+  background-color: var(--verde-serving);
+  color: var(--blanco);
+  padding: 0.3rem 0.75rem;
+  margin: 0.25rem 0.25rem 0 0;
+  border-radius: 25px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background-color 0.5s ease;
 }
 
-.blog-sidebar h4 {
-  color: #004987;
-  font-weight: 700;
-  margin-bottom: 1rem;
+.tag-categoria:hover {
+  background-color: #7db039;
+  cursor: pointer;
 }
 
-.blog-sidebar a {
-  color: #004987;
-  display: flex;
-  align-items: center;
+/* Estilos para la sección de redes sociales */
+.social-section {
+    position: relative;
+    margin: 3rem 0;
+    padding: 2rem 0;
+    background-color: #f8f9fa;
+    border-radius: 16px;
 }
 
-.blog-sidebar a:hover {
-  color: #8EC441;
+.social-title {
+    color: var(--azul-serving);
+    font-weight: 600;
+    font-size: 1.4rem;
 }
 
-.blog-sidebar a::before {
-  content: "\f054"; /* FontAwesome arrow */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  margin-right: 0.5rem;
-  font-size: 0.8rem;
-}
-.navbar {
-  background-color: #ffffff;
-}
-
-.navbar .nav-link {
-  color: #ffffff !important;
+.title-underline {
+    height: 3px;
+    width: 60%;
+    background-color: var(--verde-serving);
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
 }
 
-.navbar .nav-link:hover {
-  color: --verde-serving !important;
+.social-links {
+    margin-top: 2rem;
 }
 
-.btn-success {
-  background-color: #8EC441;
-  border-color: #8EC441;
+.social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--negro);
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-.btn-success:hover {
-  background-color: #76b238;
-  border-color: #76b238;
+.social-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--blanco);
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
-.card-img-top {
-  height: 250px;          /* altura fija para todas las imágenes */
-  object-fit: cover;      /* recorta la imagen para llenar el espacio sin deformar */
-  width: 100%;            /* ancho completo del contenedor */
-  border-top-left-radius: 0.75rem;  /* mismo radio que rounded-top-3 */
-  border-top-right-radius: 0.75rem;
+
+.social-link:hover .social-icon-container {
+    background-color: var(--verde-serving);
+    transform: translateY(-5px);
 }
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+.social-link:hover {
+    color: var(--azul-serving);
 }
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+
+.social-link i {
+    font-size: 1.5rem;
+    color: var(--azul-serving);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover i {
+    color: var(--blanco);
+}
+
+.social-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+/* Estilos para el footer moderno */
+.footer {
+    background-color: var(--azul-serving);
+    color: var(--blanco);
+    border-top: 4px solid var(--verde-serving);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.logo-icon {
+    font-size: 1.4rem;
+    color: var(--verde-serving);
+}
+
+.creator-link {
+    color: var(--lima-secundario);
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.creator-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--lima-secundario);
+    transition: width 0.3s ease;
+}
+
+.creator-link:hover::after {
+    width: 100%;
+}
+
+.footer-links a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--lima-secundario);
+}
+
+.pulse {
+    color: var(--verde-serving);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Adaptabilidad para dispositivos móviles */
+@media (max-width: 768px) {
+    .social-icon-container {
+        width: 50px;
+        height: 50px;
+    }
+
+    .social-link i {
+        font-size: 1.2rem;
+    }
+
+    .footer-brand, .footer-links {
+        text-align: center;
+    }
+
+    .footer-links {
+        margin-top: 1rem;
+    }
 }
