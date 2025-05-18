@@ -7,11 +7,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;400i;700&display=swap');
 
+:root {
+  --verde-serving: #8EC441;
+  --azul-serving: #004987;
+  --gris-tecnico: #8A8C8E;
+  --lima-secundario: #B2DB79;
+}
+
 /* Tipografías base según manual */
 body {
   font-family: 'Lato', 'Calibri', 'Arial', sans-serif; /* Tipografía secundaria para cuerpos de texto */
   font-size: 16px; /* Tamaño aumentado para mejor legibilidad */
-  color: #333333; /* Equivalente al Negro 90% mencionado en el manual */
+  color: #333333;
   background-color: #ffffff;
   margin: 0;
   padding: 0;
@@ -19,13 +26,16 @@ body {
 }
 
 /* ENCABEZADO PRINCIPAL */
-.blog-header {
-  background-color: #004987; /* Azul Serving - color principal corporativo */
+.header {
+  background: linear-gradient(135deg, #304987 0%, #9077b6 50%, #00b4d8 100%);
   color: #ffffff;
-  padding: 1.5rem;
+  padding: 2rem 1rem;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
 }
+
 
 .blog-header-logo {
   font-family: 'Montserrat', sans-serif; /* Tipografía principal según manual */
@@ -63,27 +73,45 @@ h3 {
   font-size: 24px; /* Aumentado desde 18px */
   font-weight: 600; /* SemiBold */
   color: #8EC441; /* Verde Personas para subtítulos según manual */
+  padding: 30px
 }
 
 h4 {
   font-size: 20px; /* Aumentado desde 16px */
   font-weight: 600;
-  color: #8A8C8E; /* Gris Técnico para subtítulos según manual */
+  color: #004987;
 }
 
 h5, h6 {
   font-size: 18px; /* Aumentado desde 14px */
   font-weight: 400; /* Regular */
+  color: #8A8C8E;
+}
+/* NAV */
+
+.nav a {
+  border: 1px solid transparent;
+  border-radius: 50px;
+  padding: 0.4rem 0.8rem;
+  margin: 0 0.4rem;
+  font-weight: 600;
+
+}
+
+.nav a:hover {
+  background-color: #f8f9fa;
+  border-color: --verde-serving;
 }
 
 /* TITULAR DESTACADO */
 .display-4 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #004987;
+  font-size: 2.1rem;
+  font-weight: 500;
+  color: #ffffff;
   margin-bottom: 1.5rem;
-  line-height: 1.2;
+  line-height: 1.1;
+
 }
 
 @media (min-width: 768px) {
@@ -93,11 +121,39 @@ h5, h6 {
 }
 
 /* PUBLICACIONES */
+
+.card {
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
 .blog-post {
-  margin: 2rem auto;
-  padding: 1.5rem;
-  max-width: 800px;
-  border-bottom: 2px solid #f4f4f4;
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: 900px;
+  border-bottom: 1px solid #f4f4f4;
+}
+.btn {
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.btn-warning {
+  background-color: #FFC107;
+  border: none;
+  color: #fff;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #8EC441;
+  color: white;
+  border-color: #8EC441;
 }
 
 .blog-post-title {
@@ -105,7 +161,7 @@ h5, h6 {
   font-size: 1.75rem;
   font-weight: 600; /* SemiBold según manual */
   color: #004987; /* Azul Serving */
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .blog-post-meta {
@@ -121,11 +177,12 @@ h5, h6 {
   color: #004987; /* Azul Serving para destacados */
 }
 
+
 /* Enlaces */
 a {
   color: #56B4E9; /* Azul Claro - color secundario según manual */
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.5s ease;
 }
 
 a:hover {
@@ -152,6 +209,11 @@ a:hover {
 .footer-contact {
   font-weight: 700;
   color: #8A8C8E; /* Gris Técnico */
+}
+.blog-footer {
+  background: linear-gradient(to right, #f4f4f4, #e9ecef);
+  border-top: 3px solid #8EC441;
+  font-size: 0.95rem;
 }
 
 /* PAGINACIÓN */
@@ -307,11 +369,25 @@ blockquote {
 /* Imágenes acordes al estilo fotográfico */
 .blog-post img {
   max-width: 100%;
-  height: auto;
-  margin: 1.5rem 0;
-  border-radius: 4px;
-}
 
+  margin: 1.2rem 0;
+  border-radius: 35px;
+  align-items: center;
+  display: flex;
+}
+.tag{
+  color: #004987;
+  background-color: #f9f9f9;
+  border-left: 4px solid #8EC441; /* Verde Personas */
+  border-bottom: 2px solid #8EC441;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0px 2px 12px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+border
+}
 /* Adaptar texto para dispositivos móviles */
 @media (max-width: 768px) {
   body {
@@ -325,4 +401,74 @@ blockquote {
   .blog-post-title {
     font-size: 1.75rem; /* Aumentado para mantener legibilidad */
   }
+}
+.card h3:hover {
+  color: #004987;
+  text-decoration: underline;
+}
+.blog-sidebar .p-3 {
+  background-color: #f9f9f9;
+  border-left: 4px solid #8EC441; /* Verde Personas */
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.blog-sidebar h4 {
+  color: #004987;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.blog-sidebar a {
+  color: #004987;
+  display: flex;
+  align-items: center;
+}
+
+.blog-sidebar a:hover {
+  color: #8EC441;
+}
+
+.blog-sidebar a::before {
+  content: "\f054"; /* FontAwesome arrow */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
+}
+.navbar {
+  background-color: #ffffff;
+}
+
+.navbar .nav-link {
+  color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+  color: --verde-serving !important;
+}
+
+.btn-success {
+  background-color: #8EC441;
+  border-color: #8EC441;
+}
+
+.btn-success:hover {
+  background-color: #76b238;
+  border-color: #76b238;
+}
+.card-img-top {
+  height: 250px;          /* altura fija para todas las imágenes */
+  object-fit: cover;      /* recorta la imagen para llenar el espacio sin deformar */
+  width: 100%;            /* ancho completo del contenedor */
+  border-top-left-radius: 0.75rem;  /* mismo radio que rounded-top-3 */
+  border-top-right-radius: 0.75rem;
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
