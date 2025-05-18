@@ -14,3 +14,10 @@ def home(request):
         'post':post
     }
     return render(request, 'home.html', context=context)
+
+def post_by_category(request, category_id):
+    posts = Blog.objects.filter(status='Publicado', category = category_id)
+    context={
+        'posts':posts
+    }
+    return render(request, 'posts_by_category.html', context)
