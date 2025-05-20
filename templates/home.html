@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCL - Área Personas</title>
 
+
     <!-- Fuentes y estilos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -15,34 +16,57 @@
 </head>
 <body>
     <!-- Navbar -->
-    <header class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #0a2e73, #174b9c, #2e70c9); padding: 1rem;">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{% static 'images/logo_scl.jpg' %}" alt="Logo" width="120" class="mr-2">
-                <span class="font-weight-bold">Área Personas</span>
+    <header class="header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/logo_scl.jpg' %}" alt="Logo SCL" class="logo">
+                <span class="area-title">Área Personas</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-                <span class="navbar-toggler-icon"></span>
+                <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
-                <div class="d-flex align-items-center">
-                    <span class="text-white mr-3">Hola, Rodrigo</span>
-                    <a href="#" class="btn btn-success btn-sm">Cerrar sesión</a>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto">
+                    {% for cat in categories %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ cat }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="user-section">
+                    <div class="user-info">
+                        <span class="user-greeting">Hola, <strong>Rodrigo</strong></span>
+                        <a href="#" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Cerrar sesión</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </nav>
+    </div>
 
-    <!-- Categorías -->
-    <div class="nav-scroller py-2 mb-3 bg-light border-bottom">
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
         <div class="container">
-            <nav class="nav d-flex justify-content-start">
-                {% for cat in categories %}
-                <a class="p-2 text-muted" href="#">{{ cat }}</a>
-                {% endfor %}
-            </nav>
+            <form class="search-form">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar publicaciones...">
+                    <div class="input-group-append">
+                        <button class="btn btn-search" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+</header>
+
+
 
   <!-- Post Principal Mejorado (Hero Section) -->
 <section class="hero-section mb-5">
@@ -60,7 +84,10 @@
                                     <h1 class="hero-title">{{ post.title }}</h1>
                                     <p class="hero-description">{{ post.short_description }}</p>
                                     <div class="hero-meta">
-                                        <span class="hero-date"><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j F, Y" }}</span>
+                                       <span class="hero-date">
+                                         <i class="far fa-calendar-alt"></i>
+                                            {{ post.created_at|date:"j" }} de {{ post.created_at|date:"F"|lower }} de {{ post.created_at|date:"Y" }}
+                                       </span>
                                     </div>
                                     <a href="{{ post.get_absolute_url }}" class="hero-button">
                                         Leer artículo completo
@@ -77,7 +104,7 @@
     </div>
 </section>
 
-<!-- Publicaciones Destacadas Mejoradas -->
+<!-- Publicaciones Destacadas  -->
 <section class="featured-posts-section mb-5">
     <div class="container">
         <div class="section-header d-flex justify-content-between align-items-center mb-4">
@@ -108,7 +135,7 @@
                                 <div class="featured-post-content">
                                     <h4 class="featured-post-title">{{ post.title }}</h4>
                                     <div class="featured-post-meta">
-                                        <span><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j F, Y" }}</span>
+                                        <span><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j" }} de {{ post.created_at|date:"F"|lower }} de {{ post.created_at|date:"Y" }}</span>
                                     </div>
                                     <p class="featured-post-excerpt">{{ post.short_description|truncatewords:15 }}</p>
                                     <a href="{{ post.get_absolute_url }}" class="featured-post-link">
@@ -145,7 +172,7 @@
                         <div class="post-date">
                             <span class="date-day">{{ p.created_at|date:"d" }}</span>
                             <span class="date-month">{{ p.created_at|date:"M" }}</span>
-                            <span class="date-month">{{ p.created_at|date:"Y" }}</span>
+
                         </div>
                     </div>
                     {% endif %}
@@ -155,12 +182,9 @@
                             <span class="tag-categoria">{{ p.category }}</span>
                         </div>
                         <h4 class="post-title">{{ p.title }}</h4>
-                        <p class="post-excerpt">{{ p.short_description }}</p>
+                        <p class="post-excerpt">{{ p.short_description |truncatewords:10}}</p>
                         <div class="post-meta">
-                            <div class="post-meta-item">
-                                <i class="far fa-clock"></i>
-                                <span>{{ p.created_at|date:"j, F, Y" }}</span>
-                            </div>
+
                         </div>
                         <a href="{{ p.get_absolute_url }}" class="post-read-more">
                             Leer más <i class="fas fa-arrow-right"></i>
@@ -232,10 +256,10 @@
 <footer class="footer py-4">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="footer-brand">
                     <i class="fas fa-book-open logo-icon"></i>
-                    <span class="ms-2">Plataforma Informativa</span>
+                    <span class="ms-2">  Plataforma Informativa</span>
                 </div>
             </div>
             <div class="col-md-4 text-center py-3 py-md-0">
