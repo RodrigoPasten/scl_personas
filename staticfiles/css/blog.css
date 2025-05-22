@@ -64,7 +64,6 @@ h5, h6 {
 
 .navbar {
     padding: 1rem 0;
-
 }
 
 .navbar-brand {
@@ -106,7 +105,6 @@ h5, h6 {
     font-size: 1.5rem;
     padding: 0.25rem 0.75rem;
     transition: color 0.3s ease;
-
 }
 
 .navbar-toggler:focus {
@@ -120,7 +118,6 @@ h5, h6 {
 
 .navbar-nav {
     margin: 0 2rem;
-
 }
 
 .nav-item {
@@ -203,8 +200,7 @@ h5, h6 {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 0.75rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid var(--verde-serving);
-    border-top: 1px solid var(--verde-serving);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .search-form {
@@ -332,7 +328,6 @@ h5, h6 {
 /* Estilos para el Post Principal (Hero Section) */
 .hero-section {
     margin-top: 2rem;
-
 }
 
 .hero-post {

@@ -1,10 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+
+<!-- Post por categorias  -->
+<section class="featured-posts-section mb-5">
+    <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+            <h3 class="section-title position-relative d-inline-block">
+                {{category}}
+                <div class="section-underline"></div>
+            </h3>
+
+        </div>
+
+        <div class="row">
+            {% if posts %}
+                {% for post in posts %}
+
+                    <div class="col-lg-6 mb-4">
+                        <div class="featured-post-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-5">
+                                    <div class="featured-post-image">
+                                        {% if post.featured_image %}
+                                        <img src="{{ post.featured_image.url }}" alt="Imagen de {{ post.title }}">
+
+                                        <div class="featured-post-category">
+                                            <span>{{ post.category }}</span>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="featured-post-content">
+                                        <h4 class="featured-post-title">{{ post.title }}</h4>
+                                        <div class="featured-post-meta">
+                                            <span><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j" }} de {{ post.created_at|date:"F"|lower }} de {{ post.created_at|date:"Y" }}</span>
+                                        </div>
+                                        <p class="featured-post-excerpt">{{ post.short_description|truncatewords:15 }}</p>
+                                        <a href="{{ post.get_absolute_url }}" class="featured-post-link">
+                                            Leer más <i class="fas fa-arrow-right ml-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <h2>No existen post para esta categorias</h2>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

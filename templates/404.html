@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load static %}  <!-- ESTA LÍNEA ES CLAVE -->
+
+{% block content %}
+<p>No encontrado</p>
+<img src="{% static 'images/404.png' %}" alt="404-not_found">
+{% endblock %}

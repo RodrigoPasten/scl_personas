@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 
 from blog_app.models import Category, Blog
@@ -17,7 +17,12 @@ def home(request):
 
 def post_by_category(request, category_id):
     posts = Blog.objects.filter(status='Publicado', category = category_id)
+    try:
+        category = Category.objects.get(pk=category_id)
+    except:
+        return redirect('404.html')
     context={
-        'posts':posts
+        'posts':posts,
+        'category':category
     }
     return render(request, 'posts_by_category.html', context)
