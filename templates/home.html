@@ -25,7 +25,7 @@
                                             {{ post.created_at|date:"j" }} de {{ post.created_at|date:"F"|lower }} de {{ post.created_at|date:"Y" }}
                                        </span>
                                     </div>
-                                    <a href="{{ post.get_absolute_url }}" class="hero-button">
+                                    <a href="{% url 'blogs' post.slug %}" class="hero-button">
                                         Leer artículo completo
                                         <i class="fas fa-long-arrow-alt-right ml-2"></i>
                                     </a>
@@ -63,18 +63,19 @@
                                     <img src="{{ post.featured_image.url }}" alt="Imagen de {{ post.title }}">
                                     {% endif %}
                                     <div class="featured-post-category">
-                                        <span>{{ post.category }}</span>
+                                        <span >{{ post.category }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="featured-post-content">
-                                    <h4 class="featured-post-title">{{ post.title }}</h4>
+                                    <a href="{% url 'blogs' post.slug %}">
+                                    <h4 class="featured-post-title">{{ post.title }}</h4> </a>
                                     <div class="featured-post-meta">
                                         <span><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j" }} de {{ post.created_at|date:"F"|lower }} de {{ post.created_at|date:"Y" }}</span>
                                     </div>
                                     <p class="featured-post-excerpt">{{ post.short_description|truncatewords:15 }}</p>
-                                    <a href="{{ post.get_absolute_url }}" class="featured-post-link">
+                                    <a href="{% url 'blogs' post.slug %}" class="featured-post-link">
                                         Leer más <i class="fas fa-arrow-right ml-1"></i>
                                     </a>
                                 </div>
@@ -117,12 +118,14 @@
                         <div class="post-category">
                             <span class="tag-categoria">{{ p.category }}</span>
                         </div>
+                         <a href="{% url 'blogs' p.slug %}">
                         <h4 class="post-title">{{ p.title }}</h4>
+                         </a>
                         <p class="post-excerpt">{{ p.short_description |truncatewords:10}}</p>
                         <div class="post-meta">
 
                         </div>
-                        <a href="{{ p.get_absolute_url }}" class="post-read-more">
+                        <a href="{% url 'blogs' p.slug %}" class="post-read-more">
                             Leer más <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>

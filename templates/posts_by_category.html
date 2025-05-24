@@ -33,12 +33,14 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="featured-post-content">
+                                        <a href="{% url 'blogs' post.slug %}">
                                         <h4 class="featured-post-title">{{ post.title }}</h4>
+                                        </a>
                                         <div class="featured-post-meta">
                                             <span><i class="far fa-calendar-alt"></i> {{ post.created_at|date:"j" }} de {{ post.created_at|date:"F"|lower }} de {{ post.created_at|date:"Y" }}</span>
                                         </div>
                                         <p class="featured-post-excerpt">{{ post.short_description|truncatewords:15 }}</p>
-                                        <a href="{{ post.get_absolute_url }}" class="featured-post-link">
+                                        <a href="{% url 'blogs' post.slug %}" class="featured-post-link">
                                             Leer más <i class="fas fa-arrow-right ml-1"></i>
                                         </a>
                                     </div>
