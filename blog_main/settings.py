@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Apps
-    'blog_app'
+    'blog_app',
+    'employees',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
+
+PHONENUMBER_DEFAULT_REGION = "CL"
 
 LANGUAGE_CODE = 'es'
 

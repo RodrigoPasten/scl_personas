@@ -1176,14 +1176,15 @@ table tbody tr:nth-child(even) {
 
 /* Article Content */
 .article-content {
-    padding: 2rem 0;
+    padding: .5rem 0;
+
 }
 
 .article-body {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--negro);
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .article-body p {
