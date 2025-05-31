@@ -21,11 +21,13 @@ from django.conf.urls.static import static
 from django.conf import settings
 import blog_app
 from blog_app.views import home
-from blog_app import views
+from blog_app import views as BlogsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog_app.views.home, name='home'),
     path('categoria/', include('blog_app.urls')),
-    path('<slug:slug>', blog_app.views.blogs, name='blogs')
+    path('<slug:slug>', blog_app.views.blogs, name='blogs'),
+    # Search
+    path('blog/buscar/', BlogsView.search, name='search')
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

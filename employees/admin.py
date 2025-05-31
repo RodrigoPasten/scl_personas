@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import WorkPlace, Employee, Position
+from .models import WorkPlace, Employee, Position, Region
 
 
 # Cambiar títulos principales del admin
@@ -9,6 +9,13 @@ admin.site.index_title = 'Panel de Control'
 
 # Tus admin classes...
 
+@admin.register(Region)
+class RegionAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Region',{
+            'fields':('name',)
+        }),
+    )
 
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
@@ -27,7 +34,7 @@ class EmployeeAdmin(admin.ModelAdmin):
             'fields': ('name', 'last_name', 'id_card', 'birth_date', 'age', 'picture')
         }),
         ('🏠 Información de Contacto', {
-            'fields': ('address','city', 'mail', 'phone')
+            'fields': ('address','city', 'mail', 'region', 'phone')
         }),
         ('👶 Datos Familiares', {
             'fields': ('children','marital_status')

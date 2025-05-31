@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 
 from blog_app.models import Category, Blog
-
+from django.db.models import Q
 
 def home(request):
     categories = Category.objects.all()
@@ -33,3 +33,12 @@ def blogs(request, slug):
         'single_blog': single_blog,
     }
     return render(request, 'blogs.html', context)
+
+def search(request):
+    keyword = request.GET.get('keyword')
+    blogs = Blog.objects.filter(Q(title__icontains = keyword)| Q(short_description__icontains = keyword) | Q(blog_body__icontains = keyword), status = 'Publicado')
+    context = {
+        'blogs':blogs,
+        'keyword':keyword,
+    }
+    return render(request, 'search.html', context)

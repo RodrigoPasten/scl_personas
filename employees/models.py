@@ -1,8 +1,68 @@
+from tkinter.constants import CASCADE
+
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
 
+
+class Region(models.Model):
+    """Regiones de Chile"""
+    name = models.CharField(max_length=100, verbose_name='Región', unique=True)
+
+
+    class Meta:
+        verbose_name = 'Región'
+        verbose_name_plural = 'Regiones'
+
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class City(models.Model):
+    """Ciudades y comunas"""
+    name = models.CharField(max_length=100, verbose_name='Ciudad/Comuna')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name='Región')
+    is_capital = models.BooleanField(default=False, verbose_name='Es capital regional')
+    population = models.PositiveIntegerField(null=True, blank=True, verbose_name='Población')
+
+    class Meta:
+        verbose_name = 'Ciudad'
+        verbose_name_plural = 'Ciudades'
+        unique_together = ['name', 'region']
+        ordering = ['region', 'name']
+
+    def __str__(self):
+        return f"{self.name}, {self.region.name}"
+
+
+class EducationLevel(models.Model):
+    """Niveles educacionales"""
+    EDUCATION_CHOICES = [
+        (1, 'Sin estudios'),
+        (2, 'Básica incompleta'),
+        (3, 'Básica completa'),
+        (4, 'Media incompleta'),
+        (5, 'Media completa'),
+        (6, 'Técnica incompleta'),
+        (7, 'Técnica completa'),
+        (8, 'Universitaria incompleta'),
+        (9, 'Universitaria completa'),
+        (10, 'Postgrado'),
+    ]
+
+    level = models.PositiveSmallIntegerField(choices=EDUCATION_CHOICES, unique=True)
+    name = models.CharField(max_length=50, verbose_name='Nivel educacional')
+    years_study = models.PositiveSmallIntegerField(verbose_name='Años de estudio promedio')
+
+    class Meta:
+        verbose_name = 'Nivel Educacional'
+        verbose_name_plural = 'Niveles Educacionales'
+        ordering = ['level']
+
+    def __str__(self):
+        return self.name
 
 class Position(models.Model):
     job = models.CharField(max_length=100, unique=True, verbose_name='Cargo', null=True,  # Temporalmente nullable
@@ -54,10 +114,12 @@ CONTRACT_TYPE=[
 
 ]
 ESTADO_CIVIL = [
-    ('casado', 'Casado'),
-    ('soltero', 'Soltero'),
-    ('separado', 'Separado'),
-    ('viudo', 'Viudo')
+    ('soltero', 'Soltero/a'),
+    ('casado', 'Casado/a'),
+    ('separado', 'Separado/a'),
+    ('divorciado', 'Divorciado/a'),
+    ('viudo', 'Viudo/a'),
+    ('union_civil', 'Unión Civil'),
 ]
 
 
@@ -71,6 +133,7 @@ class Employee(models.Model):
     phone = PhoneNumberField(unique=True, verbose_name='Número de teléfono', region='CL', null=True, blank=True)
     mail = models.EmailField(unique=True)
     city = models.CharField(verbose_name='Ciudad', help_text='Ciudad del trabajador')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Región de origen')
     address = models.CharField(max_length=200, verbose_name="Dirección", help_text="Dirección del trabajador")
     # Info Familiar
     children = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(20)],
