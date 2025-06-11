@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credenciales - {{ empleado.name }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5><i class="fas fa-key"></i> Credenciales de Acceso</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">{{ empleado.name }} {{ empleado.last_name }}</h6>
+                        <p class="text-muted">{{ empleado.job }} - {{ empleado.work_place }}</p>
+
+                        <hr>
+
+                        <div class="mb-3">
+                            <label class="font-weight-bold">Usuario:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="{{ username }}" readonly id="username-field">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('username-field')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="font-weight-bold">Contraseña:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="{{ password_original }}" readonly id="password-field">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password-field')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Importante:</strong> La contraseña inicial es la cédula de identidad.
+                            Recomendamos que el usuario la cambie en su primer acceso.
+                        </div>
+
+                        <div class="text-center">
+                            <a href="/admin/" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Volver al Admin
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            element.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+
+            const button = element.nextElementSibling.firstElementChild;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            button.classList.add('btn-success');
+            button.classList.remove('btn-outline-secondary');
+
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('btn-success');
+                button.classList.add('btn-outline-secondary');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

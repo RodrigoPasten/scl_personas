@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     #Apps
     'blog_app',
     'employees',
+
+
+    # Apps de terceros
+    'smart_selects',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +91,54 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# Configuración CKEditor
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source'],
+            ['Format'],
+            ['Image'],
+        ],
+        'height': 400,
+        'width': '100%',
+    },
+    'blog': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format', 'Font', 'FontSize'],
+            ['Bold', 'Italic', 'Underline', 'Strike'],
+            ['TextColor', 'BGColor'],
+            ['NumberedList', 'BulletedList', 'Outdent', 'Indent'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['Image', 'Table', 'HorizontalRule'],
+            ['Source', 'Preview', 'Maximize'],
+        ],
+        'height': 500,
+        'width': '100%',
+        'filebrowserUploadUrl': '/ckeditor/upload/',
+        'filebrowserBrowseUrl': '/ckeditor/browse/',
+
+        # NUEVAS OPCIONES PARA IMÁGENES
+        'image2_alignClasses': ['image-left', 'image-center', 'image-right'],
+        'image2_disableResizer': False,
+        'extraPlugins': 'image2',
+        'removePlugins': 'image',  # Usa image2 en lugar de image básico
+
+        # Permite clases CSS personalizadas
+        'allowedContent': True,
+        'extraAllowedContent': 'img[*]; div[*]; span[*]',
+    },
+}
+# URLs de redirección para autenticación
+LOGIN_URL = 'login'          # Si no está logueado, va aquí
+LOGIN_REDIRECT_URL = 'home'  # Después del login exitoso, va aquí
+LOGOUT_REDIRECT_URL = 'login' # Después del logout, va aquí
 
 
 # Password validation

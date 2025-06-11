@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import WorkPlace, Employee, Position, Region
+from .models import WorkPlace, Employee, Position, Region, City
+from django.urls import reverse
+from django.utils.html import format_html
 
 
 # Cambiar títulos principales del admin
@@ -16,6 +18,13 @@ class RegionAdmin(admin.ModelAdmin):
             'fields':('name',)
         }),
     )
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Ciudad',{
+            'fields':('name', 'region')
+        }),
+    )
 
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
@@ -27,41 +36,54 @@ class PositionAdmin(admin.ModelAdmin):
     list_display = ('job',)
     search_fields = ('job',)
 
+
+from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
+from .models import Employee, Region, City, Position, WorkPlace
+
+
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    fieldsets = (
-        ('🧍 Datos Personales', {
-            'fields': ('name', 'last_name', 'id_card', 'birth_date', 'age', 'picture')
-        }),
-        ('🏠 Información de Contacto', {
-            'fields': ('address','city', 'mail', 'region', 'phone')
-        }),
-        ('👶 Datos Familiares', {
-            'fields': ('children','marital_status')
-        }),
-        (' Datos Laborales',{
-            'fields': ('job','work_place','entry_date', 'contract_type','end_date', 'reason_for_leaving','status')
-        })
-    )
+    list_display = ['name', 'last_name', 'id_card', 'status', 'photo_preview', 'tiene_usuario', 'crear_usuario_btn']
+    list_filter = ['status', 'work_place']
+    search_fields = ['name', 'last_name', 'id_card']
 
-    list_display = ('name', 'last_name', 'id_card', 'work_place', 'status','get_antiguedad_completa')
-    list_filter = ('status', 'work_place', 'contract_type')
-    search_fields = ('name', 'last_name', 'id_card')
-    readonly_fields = ('age', 'contract_number', 'antiguedad_texto')
-    list_editable = ('status',)
+    # NUEVA FUNCIÓN: Mostrar miniatura de la foto
+    def photo_preview(self, obj):
+        if obj.picture:
+            return format_html(
+                '<img src="{}" width="50" height="50" style="border-radius: 50%; object-fit: cover;" />',
+                obj.picture.url
+            )
+        return "Sin foto"
 
-    def get_antiguedad_completa(self, obj):
-        """Muestra la antigüedad completa en el list_display"""
-        return obj.antiguedad_texto
+    photo_preview.short_description = 'Foto'
 
-    get_antiguedad_completa.short_description = 'Antigüedad'
-    get_antiguedad_completa.admin_order_field = 'entry_date'
+    def tiene_usuario(self, obj):
+        if obj.user:
+            return "✅ Sí"
+        return "❌ No"
 
+    tiene_usuario.short_description = 'Tiene Usuario'
+
+    def crear_usuario_btn(self, obj):
+        if obj.user:
+            url = reverse('ver_credenciales_empleado', args=[obj.id])
+            return format_html('<a class="button" href="{}">Ver Credenciales</a>', url)
+        if obj.status != 'Activo':
+            return "No activo"
+
+        url = reverse('crear_usuario_empleado', args=[obj.id])
+        return format_html('<a class="button" href="{}">Crear Usuario</a>', url)
+
+    crear_usuario_btn.short_description = 'Acción'
+    crear_usuario_btn.allow_tags = True
 
 @admin.register(WorkPlace)
 class WorkPlaceAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Faenas',{
-            'fields':('work_place', 'contract_number')
+            'fields':('work_place', 'contract_number', 'adc')
         }),
     )

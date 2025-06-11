@@ -3,11 +3,6 @@
 {% block content %}
 
 <!-- Article Header -->
-
-
-
-
-
 <section class="article-header">
     <div class="container">
         <div class="row justify-content-center">
@@ -23,22 +18,18 @@
                 <!-- Article Meta -->
                 <div class="article-meta">
                     <div class="meta-item">
-
                         <time datetime="{{ single_blog.created_at|date:'Y-m-d' }}">
                            <span><i class="far fa-calendar-alt"></i> {{ single_blog.created_at|date:"j" }} de {{ single_blog.created_at|date:"F"|lower }} de {{ single_blog.created_at|date:"Y" }}</span>
                         </time>
-
                     </div>
                      <div class="col-lg-6 col-md-8 mb-6">
                     <p class="post-excerpt">{{ single_blog.short_description }}</p>
                      </div>
-
-
+                </div>
             </div>
         </div>
     </div>
 </section>
-
 
 <!-- Featured Image -->
 {% if single_blog.featured_image %}
@@ -65,27 +56,151 @@
             <div class="col-lg-8">
                 <!-- Article Body -->
                 <div class="article-body">
-                    {{ single_blog.blog_body|linebreaks }}
+                    {{ single_blog.blog_body|safe }}
                 </div>
 
+                <!-- NUEVA SECCIÓN: Comentarios -->
+                <div class="comments-section mt-5">
+                    <div class="comments-header">
+                        <h4>
+                            <i class="fas fa-comments"></i>
+                            Comentarios ({{ comments_count }})
+                        </h4>
+                    </div>
 
-                <div class="col-lg-4">
+                    <!-- Formulario para nuevo comentario -->
+                    <div class="comment-form-section mb-4" id="main-comment-form">
+                        <div class="comment-form-card">
+                            <h5 class="form-title">
+                                <i class="fas fa-edit"></i> Agregar comentario
+                            </h5>
+                            <form method="POST" class="comment-form">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    {{ comment_form.content }}
+                                </div>
+                                <button type="submit" class="btn btn-primary comment-btn">
+                                    <i class="fas fa-paper-plane"></i> Comentar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
 
-                    <div >
+                    <!-- Lista de comentarios existentes -->
+                    <div class="comments-list">
+                        {% for comment in comments %}
+                            <div class="comment-item main-comment">
+                                <div class="comment-header">
+                                    <div class="comment-author">
+                                        <i class="fas fa-user-circle"></i>
+                                        <strong>{{ comment.author_name }}</strong>
+                                    </div>
+                                    <div class="comment-date">
+                                        <i class="far fa-clock"></i>
+                                        <small class="text-muted">{{ comment.created_date|date:"d M Y H:i" }}</small>
+                                    </div>
+                                </div>
+                                <div class="comment-content">
+                                    {{ comment.content|linebreaks }}
+                                </div>
+
+                                <!-- Botón responder -->
+                                <div class="comment-actions">
+                                    <button class="reply-btn" onclick="toggleReplyForm({{ comment.id }})">
+                                        <i class="fas fa-reply"></i> Responder
+                                    </button>
+                                </div>
+
+                                <!-- Formulario de respuesta (oculto inicialmente) -->
+                                <div class="reply-form-container" id="reply-form-{{ comment.id }}" style="display: none;">
+                                    <div class="reply-form-card">
+                                        <h6 class="reply-title">
+                                            <i class="fas fa-reply"></i> Responder a {{ comment.author_name }}
+                                        </h6>
+                                        <form method="POST" class="reply-form">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                            <div class="form-group">
+                                                <textarea name="content" class="form-control" rows="3" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                                            </div>
+                                            <div class="reply-form-buttons">
+                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-paper-plane"></i> Responder
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-secondary" onclick="toggleReplyForm({{ comment.id }})">
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- Respuestas existentes -->
+                                {% if comment.replies.all %}
+                                    <div class="replies-container">
+                                        {% for reply in comment.replies.all %}
+                                            {% if reply.active %}
+                                                <div class="comment-item reply-comment">
+                                                    <div class="comment-header">
+                                                        <div class="comment-author">
+                                                            <i class="fas fa-user-circle"></i>
+                                                            <strong>{{ reply.author_name }}</strong>
+                                                            <span class="reply-indicator">
+                                                                <i class="fas fa-reply"></i> respondió a {{ comment.author_name }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="comment-date">
+                                                            <i class="far fa-clock"></i>
+                                                            <small class="text-muted">{{ reply.created_date|date:"d M Y H:i" }}</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        {{ reply.content|linebreaks }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% empty %}
+                            <div class="no-comments">
+                                <div class="no-comments-icon">
+                                    <i class="fas fa-comment-slash"></i>
+                                </div>
+                                <p class="no-comments-text">
+                                    Aún no hay comentarios. ¡Sé el primero en comentar!
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- JavaScript para funcionalidad de respuestas -->
+                <script>
+                function toggleReplyForm(commentId) {
+                    const replyForm = document.getElementById('reply-form-' + commentId);
+                    if (replyForm.style.display === 'none') {
+                        replyForm.style.display = 'block';
+                        replyForm.querySelector('textarea').focus();
+                    } else {
+                        replyForm.style.display = 'none';
+                    }
+                }
+                </script>
+
+                <!-- Botón volver (movido después de comentarios) -->
+                <div class="col-lg-4 mt-4">
+                    <div>
                         <a href="{% url 'home' %}" class="back-to-blog-btn">
                             <i class="fas fa-arrow-left"></i>
                             Volver
                         </a>
                     </div>
-
-
-
-
-
+                </div>
             </div>
         </div>
     </div>
 </article>
-
 
 {% endblock %}

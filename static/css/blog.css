@@ -1,10 +1,10 @@
 :root {
   --naranja-serving: #FE5E41;
-  --naranja-secundario: #DB3A34;
-  --azul-serving: #0353a4;
-  --azul-degradado : #0d21a1;
+  --naranja-secundario: #F35B04;
+  --azul-serving: #3626A7;
+  --azul-degradado : #3D348B;
   --gris-tecnico: #8A8C8E;
-  --lima-secundario: #EA7317;
+  --lima-secundario: #C8AD55 ;
   --blanco: #ffffff;
   --negro: #333333;
 }
@@ -64,58 +64,60 @@ a:hover{
 }
 /* Estilos para el Header Mejorado */
 .header {
-    background: linear-gradient(60deg, var(--azul-serving), var(--azul-degradado));
+    background: linear-gradient(90deg, var(--azul-serving), var(--azul-degradado));
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
-
 .navbar {
-    padding: 1rem 0;
-
+    padding: 0.7rem 0;
+    min-height: 80px;
+    max-height: 90px
 }
 
 .navbar-brand {
-  font-weight: 500;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0;
 }
-.logo {
-    height: 80px;
-    border-radius: 70%;
 
-    margin-right: 5rem;
-    transition: transform 0.5s ease;
+.logo {
+    height: 90px;
+    width: 90px;
+    border-radius: 15%;
+    object-fit: contain;
+    margin-right: 0.9rem;
+    transition: transform 0.4s ease;
 }
 
 .navbar-brand:hover .logo {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .area-title {
     color: var(--blanco);
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 1.1rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.9px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    margin-left:-80px;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+    margin: 0;
 }
-.area-title:hover{
+
+.area-title:hover {
     color: var(--naranja-serving);
-    transition: color 4s ease;
+    transition: color 0.3s ease;
 }
 
 .navbar-toggler {
     border: none;
     color: var(--blanco);
-    font-size: 1.5rem;
-    padding: 0.25rem 0.75rem;
+    font-size: 1.3rem;
+    padding: 0.25rem 0.5rem;
     transition: color 0.3s ease;
-
 }
 
 .navbar-toggler:focus {
@@ -128,19 +130,19 @@ a:hover{
 }
 
 .navbar-nav {
-    margin: 0 2rem;
-
+    margin-left: auto;
 }
 
 .nav-item {
-    margin: 0 0.5rem;
+    margin: 0 0.2rem;
 }
 
 .nav-link {
     color: var(--blanco) !important;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
     transition: all 0.3s ease;
     position: relative;
 }
@@ -148,7 +150,7 @@ a:hover{
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 2px;
     left: 50%;
     width: 0;
     height: 2px;
@@ -162,7 +164,7 @@ a:hover{
 }
 
 .nav-link:hover::after {
-    width: 70%;
+    width: 60%;
 }
 
 .nav-link.active {
@@ -173,6 +175,7 @@ a:hover{
 .user-section {
     display: flex;
     align-items: center;
+    margin-left: 1rem;
 }
 
 .user-info {
@@ -183,30 +186,31 @@ a:hover{
 
 .user-greeting {
     color: var(--blanco);
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.1rem;
+    white-space: nowrap;
 }
 
 .logout-btn {
     display: flex;
     align-items: center;
     color: var(--naranja-serving);
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 500;
     transition: all 0.3s ease;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .logout-btn i {
-    margin-right: 0.35rem;
+    margin-right: 0.3rem;
 }
 
 .logout-btn:hover {
     color: var(--naranja-secundario);
     text-decoration: none;
-    transform: translateX(3px);
+    transform: translateX(2px);
 }
-
 /* Barra de búsqueda */
 .search-bar {
     background-color: linear-gradient(70deg, var(--azul-serving), var(--azul-degradado));
@@ -726,7 +730,7 @@ a:hover{
 }
 
 .tag-categoria:hover {
-    background-color: var(--narajna-secundario);
+    background-color: var(--naraja-secundario);
 }
 
 .post-title {
@@ -742,6 +746,210 @@ a:hover{
     color: var(--naranja-serving);
 }
 
+/* Logo en la página de login */
+.login-logo {
+    width: 100px;           /* Más pequeño */
+    height: 100px;          /* Altura fija también */
+    object-fit: contain;   /* Mantiene proporción sin deformar */
+    margin-bottom: 25px;
+    border-radius: 50%;    /* Circular como el del navbar */
+}
+
+/* Para pantallas muy pequeñas (móviles) */
+@media (max-width: 576px) {
+    .login-logo {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Para tablets */
+@media (max-width: 768px) {
+    .login-logo {
+        width: 120px;
+        height: 50px;
+    }
+}
+
+.user-details {
+    display: block;
+    color: var(--naranja-serving);
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+.login-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.login-body {
+    background: linear-gradient(90deg, var(--azul-serving), var(--azul-degradado));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* === COMENTARIOS === */
+.comments-section {
+    border-top: 2px solid #e9ecef;
+    padding-top: 2rem;
+}
+
+.comments-header h4 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.comments-header i {
+    color: #3498db;
+    margin-right: 0.5rem;
+}
+
+/* Formulario de comentarios */
+.comment-form-card {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-title {
+    color: #495057;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.form-title i {
+    color: #28a745;
+    margin-right: 0.5rem;
+}
+
+.comment-form textarea {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+.comment-form textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.comment-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.comment-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Lista de comentarios */
+.comment-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.comment-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+}
+
+.comment-author i {
+    color: #6c757d;
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.comment-author strong {
+    color: #2c3e50;
+}
+
+.comment-date {
+    display: flex;
+    align-items: center;
+}
+
+.comment-date i {
+    color: #6c757d;
+    margin-right: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.comment-content {
+    color: #495057;
+    line-height: 1.6;
+}
+
+/* Sin comentarios */
+.no-comments {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px dashed #dee2e6;
+}
+
+.no-comments-icon i {
+    font-size: 3rem;
+    color: #adb5bd;
+    margin-bottom: 1rem;
+}
+
+.no-comments-text {
+    color: #6c757d;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .comment-date {
+        margin-top: 0.5rem;
+    }
+}
 .post-excerpt {
     color: var(--gris-tecnico);
     font-size: 0.9rem;
@@ -1592,6 +1800,145 @@ table tbody tr:nth-child(even) {
         font-size: 1.1rem;
     }
 }
-</style>
+/* === ESTILOS PARA IMÁGENES EN POSTS === */
+.article-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+}
+
+/* Imagen alineada a la izquierda con texto alrededor */
+.image-left {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+    max-width: 300px;
+}
+
+/* Imagen centrada */
+.image-center {
+    display: block;
+    margin: 1.5rem auto;
+    text-align: center;
+}
+
+/* Imagen alineada a la derecha con texto alrededor */
+.image-right {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    max-width: 300px;
+}
+
+/* Limpiar floats después de imágenes flotantes */
+.article-body::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive: En móviles, todas las imágenes se centran */
+@media (max-width: 768px) {
+    .image-left,
+    .image-right {
+        float: none;
+        display: block;
+        margin: 1rem auto;
+        max-width: 100%;
+    }
+}
+
+/* === RESPUESTAS A COMENTARIOS === */
+.comment-actions {
+    margin-top: 0.8rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #f1f3f4;
+}
+
+.reply-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.reply-btn:hover {
+    color: #3498db;
+}
+
+.reply-btn i {
+    margin-right: 0.3rem;
+}
+
+/* Formulario de respuesta */
+.reply-form-container {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid #e9ecef;
+}
+
+.reply-form-card {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.reply-title {
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+.reply-title i {
+    color: #28a745;
+    margin-right: 0.3rem;
+}
+
+.reply-form-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+/* Comentarios de respuesta */
+.replies-container {
+    margin-top: 1rem;
+    margin-left: 2rem;
+    padding-left: 1rem;
+    border-left: 3px solid #3498db;
+}
+
+.reply-comment {
+    background: #f8f9fa !important;
+    border-left: 4px solid #3498db;
+    margin-bottom: 0.8rem;
+}
+
+.reply-indicator {
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: normal;
+    margin-left: 0.5rem;
+}
+
+.reply-indicator i {
+    margin-right: 0.2rem;
+}
+
+/* Responsive para respuestas */
+@media (max-width: 768px) {
+    .replies-container {
+        margin-left: 1rem;
+    }
+
+    .reply-form-container {
+        margin-left: 0.5rem;
+    }
+}
 
 

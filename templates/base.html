@@ -37,15 +37,20 @@
                     {% endfor %}
                 </ul>
 
-                <div class="user-section">
-                    <div class="user-info">
-                        <span class="user-greeting">Hola, <strong>Rodrigo</strong></span>
-                        <a href="#" class="logout-btn">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span>Cerrar sesión</span>
-                        </a>
-                    </div>
-                </div>
+             <div class="user-section">
+    <div class="user-info">
+        {% if user.employee %}
+            <span class="user-greeting">Hola, <strong>{{ user.employee.name }}</strong></span>
+            <small class="user-details">{{ user.employee.job }} - {{ user.employee.work_place }}</small>
+        {% else %}
+            <span class="user-greeting">Hola, <strong>{{ user.first_name|default:user.username }}</strong></span>
+        {% endif %}
+        <a href="{% url 'logout' %}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Cerrar sesión</span>
+        </a>
+    </div>
+</div>
             </div>
         </nav>
     </div>

@@ -1,9 +1,9 @@
-from tkinter.constants import CASCADE
-
+from django.contrib.auth.models import User
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
+from smart_selects.db_fields import ChainedForeignKey
 
 
 class Region(models.Model):
@@ -25,7 +25,7 @@ class City(models.Model):
     name = models.CharField(max_length=100, verbose_name='Ciudad/Comuna')
     region = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name='Región')
     is_capital = models.BooleanField(default=False, verbose_name='Es capital regional')
-    population = models.PositiveIntegerField(null=True, blank=True, verbose_name='Población')
+
 
     class Meta:
         verbose_name = 'Ciudad'
@@ -34,7 +34,7 @@ class City(models.Model):
         ordering = ['region', 'name']
 
     def __str__(self):
-        return f"{self.name}, {self.region.name}"
+        return f"{self.name}"
 
 
 class EducationLevel(models.Model):
@@ -79,8 +79,9 @@ class Position(models.Model):
 class WorkPlace(models.Model):
     work_place = models.CharField(max_length=200, verbose_name='Nombre de Faena', help_text='Ingrese el nombre de la faena')
     contract_number = models.IntegerField(validators=[MinValueValidator(0)], verbose_name="número de contrato", unique=True,
-                                          help_text='Ingrese número de contrato si corresponde',  null=True,  # ← Agregar esto
+                                          help_text='Ingrese número de contrato si corresponde',  null=True,
     blank=True)
+    adc = models.CharField(max_length=150, verbose_name='Nombre ADC o líder del contrato')
 
     class Meta:
         verbose_name = 'Centro de Trabajo'
@@ -131,15 +132,36 @@ class Employee(models.Model):
     birth_date = models.DateField(verbose_name='Fecha Nacimiento')
     #Contacto
     phone = PhoneNumberField(unique=True, verbose_name='Número de teléfono', region='CL', null=True, blank=True)
-    mail = models.EmailField(unique=True)
-    city = models.CharField(verbose_name='Ciudad', help_text='Ciudad del trabajador')
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Región de origen')
+    mail = models.EmailField(unique=True, verbose_name='E-mail')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name='Región de origen')
+    city = ChainedForeignKey(
+        City,
+        chained_field="region",
+        chained_model_field="region",
+        show_all=False,
+        auto_choose=True,
+        sort=True,
+        verbose_name = "Ciudad"
+    )
     address = models.CharField(max_length=200, verbose_name="Dirección", help_text="Dirección del trabajador")
     # Info Familiar
     children = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(20)],
                                    verbose_name='Cantidad de hijos')
     marital_status = models.CharField(choices=ESTADO_CIVIL, null=True, blank=True, verbose_name='Estado Civil')
+    contacto_emergencia = models.CharField(max_length=100, verbose_name="nombre contacto emergencia:",
+                                           help_text="En caso de emergencia, llamar a:", blank= True, null=True)
+    numero_emergencia = PhoneNumberField(unique=True, verbose_name="Teléfono emergencia", blank=True, null=True)
     picture = models.ImageField(upload_to='upload/%d%m%Y')
+
+    # Conexion con Django User
+    user = models.OneToOneField(
+        User,
+        on_delete= models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name='Usuario del sistema'
+    )
+
     age = models.PositiveIntegerField(verbose_name='Edad', editable=False)
 
     @property
@@ -233,7 +255,7 @@ class Employee(models.Model):
         return antiguedad['años'] if antiguedad else 0
 
     # datos laborales
-    job = models.ForeignKey(Position, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Cargo')
+    job = models.ForeignKey(Position, on_delete=models.CASCADE, verbose_name='Cargo')
     work_place = models.ForeignKey(
         WorkPlace,
         verbose_name='Lugar de Trabajo',
@@ -241,7 +263,7 @@ class Employee(models.Model):
         related_name='employees'
     )
 
-    contract_number = models.IntegerField(verbose_name='Número de contrato')
+    boss = models.BooleanField(verbose_name="Es jefatura")
     status = models.CharField(choices=STATUS_CHOICE, verbose_name='Estado')
     entry_date = models.DateField(verbose_name='Fecha de Ingreso')
     contract_type = models.CharField(choices=CONTRACT_TYPE, verbose_name='Tipo de Contrato')
