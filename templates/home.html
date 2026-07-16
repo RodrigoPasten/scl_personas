@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 
@@ -135,25 +134,45 @@
         </div>
 
         <!-- Paginación -->
+        {% if post.has_other_pages %}
         <div class="pagination-container mt-5">
             <nav aria-label="Navegación de páginas">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item {% if not prev_page %}disabled{% endif %}">
-                        <a class="page-link" href="#" aria-label="Anterior">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Siguiente">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </li>
+
+                    {% if post.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ post.previous_page_number }}" aria-label="Anterior">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"><i class="fas fa-chevron-left"></i></span>
+                        </li>
+                    {% endif %}
+
+                    {% for num in post.paginator.page_range %}
+                        <li class="page-item {% if num == post.number %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if post.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ post.next_page_number }}" aria-label="Siguiente">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"><i class="fas fa-chevron-right"></i></span>
+                        </li>
+                    {% endif %}
+
                 </ul>
             </nav>
         </div>
+        {% endif %}
     </div>
 </section>
 

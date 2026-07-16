@@ -33,18 +33,28 @@ def logout_view(request):
 
 
 # Crea las categorias del nav
+from django.core.paginator import Paginator
+
 @login_required
 def home(request):
     categories = Category.objects.all()
-    featured_post = Blog.objects.filter(is_featured = True)
-    post = Blog.objects.filter(is_featured = False, status = 'Publicado')
+    featured_post = Blog.objects.filter(is_featured=True, status='Publicado')
+
+    posts_qs = Blog.objects.filter(
+        is_featured=False,
+        status='Publicado',
+    ).order_by('-created_at', '-id')
+
+    paginator = Paginator(posts_qs, 3)          # 3 publicaciones por página
+    page_number = request.GET.get('page')
+    post = paginator.get_page(page_number)
+
     context = {
-        'categories':categories,
-        'featured_post':featured_post,
-        'post':post
+        'categories': categories,
+        'featured_post': featured_post,
+        'post': post,
     }
     return render(request, 'home.html', context=context)
-
 @login_required
 def post_by_category(request, category_id):
     posts = Blog.objects.filter(status='Publicado', category = category_id)
@@ -71,14 +81,25 @@ def blogs(request, slug):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = single_blog  # CORREGIDO: single_blog
+            comment.post = single_blog
             comment.author = request.user
+
+            # Si viene parent_id, es una respuesta: engancharla a su padre
+            parent_id = request.POST.get('parent_id')
+            if parent_id:
+                comment.parent = Comment.objects.filter(
+                    id=parent_id,
+                    post=single_blog,
+                ).first()
+
             comment.save()
             messages.success(request, 'Comentario agregado exitosamente')
             return redirect('blogs', slug=slug)
     else:
         form = CommentForm()
 
+    comments = Comment.get_main_comments(single_blog)
+    comments_count = Comment.objects.filter(post=single_blog, active=True).count()
     # CONTEXTO ÚNICO Y CORREGIDO
     context = {
         'single_blog': single_blog,  # Mantén tu nombre original
@@ -98,3 +119,25 @@ def search(request):
         'keyword':keyword,
     }
     return render(request, 'search.html', context)
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
+@login_required
+def cambiar_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+
+            empleado = getattr(user, 'employee', None)
+            if empleado:
+                empleado.must_change_password = False
+                empleado.save()
+
+            messages.success(request, 'Contraseña actualizada correctamente')
+            return redirect('home')
+    else:
+        form = PasswordChangeForm(user=request.user)
+
+    return render(request, 'cambiar_password.html', {'form': form})

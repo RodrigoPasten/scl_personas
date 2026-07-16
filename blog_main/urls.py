@@ -16,6 +16,7 @@ urlpatterns = [
     # URLs de autenticación (NUEVAS)
     path('login/', BlogsView.login_view, name='login'),
     path('logout/', BlogsView.logout_view, name='logout'),
+    path('cambiar-password/', BlogsView.cambiar_password, name='cambiar_password'),
 
     # Django-smart-select
     path('chaining/', include('smart_selects.urls')),

@@ -99,3 +99,26 @@ def ver_credenciales_empleado(request, employee_id):
         'credenciales.html',
         context,
     )
+@staff_member_required
+def resetear_password_empleado(request, employee_id):
+    empleado = get_object_or_404(Employee, id=employee_id)
+
+    if not empleado.user:
+        messages.error(request, f'{empleado} no tiene un usuario creado.')
+        return redirect('/admin/employees/employee/')
+
+    rut_normalizado = normalizar_rut(empleado.id_card)
+
+    with transaction.atomic():
+        empleado.user.set_password(rut_normalizado)
+        empleado.user.save()
+
+        empleado.must_change_password = True
+        empleado.save()
+
+    messages.success(
+        request,
+        f'Contraseña de {empleado} reseteada a su RUT (sin puntos ni guion). '
+        f'Deberá crear una nueva al iniciar sesión.'
+    )
+    return redirect('/admin/employees/employee/')

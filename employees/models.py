@@ -58,6 +58,10 @@ class Employee(models.Model):
         editable=False,
         verbose_name='Fecha de retiro de autorización',
     )
+    must_change_password = models.BooleanField(
+        default=True,
+        verbose_name='Debe cambiar su contraseña',
+    )
 
     class Meta:
         verbose_name = 'Trabajador'
