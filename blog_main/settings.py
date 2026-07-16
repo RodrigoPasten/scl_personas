@@ -47,8 +47,7 @@ INSTALLED_APPS = [
 
     # Apps de terceros
     'smart_selects',
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-'blog_main.middleware.ForcePasswordChangeMiddleware',
+    'blog_main.middleware.ForcePasswordChangeMiddleware',
 ]
 
 ROOT_URLCONF = 'blog_main.urls'
@@ -93,49 +92,27 @@ DATABASES = {
     }
 }
 # Configuración CKEditor
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
-            ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source'],
-            ['Format'],
-            ['Image'],
-        ],
-        'height': 400,
-        'width': '100%',
-    },
+CKEDITOR_5_CONFIGS = {
     'blog': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Format', 'Font', 'FontSize'],
-            ['Bold', 'Italic', 'Underline', 'Strike'],
-            ['TextColor', 'BGColor'],
-            ['NumberedList', 'BulletedList', 'Outdent', 'Indent'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink'],
-            ['Image', 'Table', 'HorizontalRule'],
-            ['Source', 'Preview', 'Maximize'],
+        'language': 'es',
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'link', '|',
+            'bulletedList', 'numberedList', '|',
+            'blockQuote', 'insertTable', 'imageUpload', '|',
+            'undo', 'redo',
         ],
-        'height': 500,
-        'width': '100%',
-        'filebrowserUploadUrl': '/ckeditor/upload/',
-        'filebrowserBrowseUrl': '/ckeditor/browse/',
-
-        # NUEVAS OPCIONES PARA IMÁGENES
-        'image2_alignClasses': ['image-left', 'image-center', 'image-right'],
-        'image2_disableResizer': False,
-        'extraPlugins': 'image2',
-        'removePlugins': 'image',  # Usa image2 en lugar de image básico
-
-        # Permite clases CSS personalizadas
-        'allowedContent': True,
-        'extraAllowedContent': 'img[*]; div[*]; span[*]',
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Párrafo', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Subtítulo', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Subtítulo menor', 'class': 'ck-heading_heading3'},
+            ]
+        },
     },
 }
+
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = 'staff'
 # URLs de redirección para autenticación
 LOGIN_URL = 'login'          # Si no está logueado, va aquí
 LOGIN_REDIRECT_URL = 'home'  # Después del login exitoso, va aquí

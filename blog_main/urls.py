@@ -24,7 +24,7 @@ urlpatterns = [
     path('blog/buscar/', BlogsView.search, name='search'),
 
     #CKEditor
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
 
     # URLS de employee
     path('employee/', include('employees.urls')),

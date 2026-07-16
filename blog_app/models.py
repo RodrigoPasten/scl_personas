@@ -1,4 +1,4 @@
-from ckeditor_uploader.fields import RichTextUploadingField
+from django_ckeditor_5.fields import CKEditor5Field
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -25,7 +25,7 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Autor')
     featured_image = models.ImageField(upload_to='upload/%d%m%Y', verbose_name='Imagen')
     short_description = models.TextField(max_length=1500, verbose_name='Descripción')
-    blog_body = RichTextUploadingField(config_name='blog')
+    blog_body = CKEditor5Field(verbose_name='Contenido', config_name='blog')
     status = models.CharField(choices=STATUS_CHOICE, default='Borrador', verbose_name='Estado')
     is_featured= models.BooleanField(default=0, verbose_name='Publicación destacada')
     created_at = models.DateField(auto_now_add=True)

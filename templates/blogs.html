@@ -3,29 +3,17 @@
 {% block content %}
 
 <!-- Article Header -->
-<section class="article-header">
+<section class="article-header{% if single_blog.featured_image %} article-header--with-image{% endif %}">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <!-- Category Badge -->
-                <div class="article-category mb-3">
-                    <span class="category-badge">{{ single_blog.category }}</span>
-                </div>
-
-                <!-- Article Title -->
-                <h1 class="article-title">{{ single_blog.title }}</h1>
-
-                <!-- Article Meta -->
-                <div class="article-meta">
-                    <div class="meta-item">
-                        <time datetime="{{ single_blog.created_at|date:'Y-m-d' }}">
-                           <span><i class="far fa-calendar-alt"></i> {{ single_blog.created_at|date:"j" }} de {{ single_blog.created_at|date:"F"|lower }} de {{ single_blog.created_at|date:"Y" }}</span>
-                        </time>
-                    </div>
-                     <div class="col-lg-6 col-md-8 mb-6">
-                    <p class="post-excerpt">{{ single_blog.short_description }}</p>
-                     </div>
-                </div>
+        <div class="article-header-inner">
+            <span class="category-badge">{{ single_blog.category }}</span>
+            <h1 class="article-title">{{ single_blog.title }}</h1>
+            <p class="article-standfirst">{{ single_blog.short_description }}</p>
+            <div class="article-meta">
+                <time datetime="{{ single_blog.created_at|date:'Y-m-d' }}">
+                    <i class="far fa-calendar-alt"></i>
+                    {{ single_blog.created_at|date:"j" }} de {{ single_blog.created_at|date:"F"|lower }} de {{ single_blog.created_at|date:"Y" }}
+                </time>
             </div>
         </div>
     </div>
@@ -36,12 +24,11 @@
 <section class="featured-image-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-10">
+            <div class="col-lg-8">
                 <div class="featured-image-container">
                     <img src="{{ single_blog.featured_image.url }}"
                          alt="{{ single_blog.title }}"
                          class="featured-image">
-                    <div class="image-overlay"></div>
                 </div>
             </div>
         </div>
