@@ -1,60 +1,80 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.models import User
-from django.contrib.admin.views.decorators import staff_member_required
+
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import User
+from django.db import transaction
+from django.shortcuts import get_object_or_404, redirect, render
+
 from .models import Employee
 
 
-@staff_member_required  # Solo admin puede usar esto
-def crear_usuario_empleado(request, employee_id):
-    # Buscar el empleado
-    empleado = get_object_or_404(Employee, id=employee_id)
+def normalizar_rut(rut):
+    """
+    Convierte diferentes formatos de RUT a un formato único.
 
-    # ¿Ya tiene usuario?
-    if empleado.user:
-        messages.warning(request, f'{empleado} ya tiene usuario creado')
-        return redirect('/admin/')  # Vuelve al admin
-
-    # ¿Está activo?
-    if empleado.status != 'Activo':
-        messages.error(request, f'{empleado} no está activo, no se puede crear usuario')
-        return redirect('/admin/')
-
-    # Generar username y password
-    username = generar_username(empleado)
-    password = empleado.id_card  # Usamos la cédula como contraseña inicial
-
-    # Crear el usuario en Django
-    nuevo_usuario = User.objects.create_user(
-        username=username,
-        password=password,
-        first_name=empleado.name,
-        last_name=empleado.last_name,
-        email=empleado.mail
+    Ejemplos:
+    12.345.678-9 -> 123456789
+    12345678-9   -> 123456789
+    """
+    return (
+        rut.replace('.', '')
+        .replace('-', '')
+        .replace(' ', '')
+        .upper()
     )
 
-    # Conectar empleado con usuario
-    empleado.user = nuevo_usuario
-    empleado.save()
 
-    messages.success(request, f'Usuario creado para {empleado}. Username: {username}, Password: {password}')
-    return redirect('/admin/')
+@staff_member_required
+def crear_usuario_empleado(request, employee_id):
+    empleado = get_object_or_404(Employee, id=employee_id)
 
+    # Evitar crear dos usuarios para el mismo trabajador.
+    if empleado.user:
+        messages.warning(
+            request,
+            f'{empleado} ya tiene un usuario creado.'
+        )
+        return redirect('/admin/employees/employee/')
 
-def generar_username(empleado):
-    # Ejemplo: juan.perez (nombre.apellido)
-    nombre = empleado.name.split()[0].lower()  # Primer nombre
-    apellido = empleado.last_name.split()[0].lower()  # Primer apellido
-    username = f"{nombre}.{apellido}"
+    rut_normalizado = normalizar_rut(empleado.id_card)
 
-    # Si ya existe, agregar número
-    counter = 1
-    original_username = username
-    while User.objects.filter(username=username).exists():
-        username = f"{original_username}{counter}"
-        counter += 1
+    # El RUT será el username interno de Django.
+    username = rut_normalizado
 
-    return username
+    # Contraseña inicial.
+    password = rut_normalizado
+
+    # Evitar que dos trabajadores compartan el mismo RUT.
+    if User.objects.filter(username=username).exists():
+        messages.error(
+            request,
+            f'Ya existe un usuario asociado al RUT {empleado.id_card}.'
+        )
+        return redirect('/admin/employees/employee/')
+
+    # Crea el usuario y conecta el Employee en una sola operación.
+    with transaction.atomic():
+        nuevo_usuario = User.objects.create_user(
+            username=username,
+            password=password,
+            first_name=empleado.name,
+            last_name=empleado.last_name,
+            email=empleado.email or '',
+        )
+
+        empleado.user = nuevo_usuario
+        empleado.save()
+
+    messages.success(
+        request,
+        (
+            f'Usuario creado para {empleado}. '
+            f'RUT de acceso: {empleado.id_card}. '
+            f'Contraseña inicial: {password}.'
+        )
+    )
+
+    return redirect('/admin/employees/employee/')
 
 
 @staff_member_required
@@ -62,14 +82,20 @@ def ver_credenciales_empleado(request, employee_id):
     empleado = get_object_or_404(Employee, id=employee_id)
 
     if not empleado.user:
-        messages.error(request, f'{empleado} no tiene usuario creado')
-        return redirect('/admin/')
+        messages.error(
+            request,
+            f'{empleado} no tiene un usuario creado.'
+        )
+        return redirect('/admin/employees/employee/')
 
-    # Mostrar las credenciales
     context = {
         'empleado': empleado,
-        'username': empleado.user.username,
-        'password_original': empleado.id_card,  # Sabemos que usamos la cédula
+        'username': empleado.id_card,
+        'password_original': empleado.id_card,
     }
 
-    return render(request, 'credenciales.html', context)
+    return render(
+        request,
+        'credenciales.html',
+        context,
+    )

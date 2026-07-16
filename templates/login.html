@@ -1,24 +1,29 @@
 {% load static %}
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - SCL</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'css/blog.css' %}?v=2" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/blog.css' %}?v=3" rel="stylesheet">
 </head>
 <body class="login-body">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="login-card">
-                    <div class="text-center mb-4">
-                        <img src="{% static 'images/logo_scl.jpg' %}" alt="Logo SCL" class="login-logo">
-                        <h2>Bienvenido al portal informativo de Serving Consultores </h2>
-                        <h3>Área Personas</h3>
-                        <p class="text-muted">Acceso exclusivo para trabajadores de Serving Consultores Ltda.</p>
-                    </div>
+    <div class="login-wrapper">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="login-card">
+                        <div class="text-center mb-4">
+                           <img
+    src="{% static 'images/logo_gdp.png' %}"
+    alt="Logo GDP"
+    class="login-logo"
+>
+                            <h2>Bienvenido al portal informativo de </h2>
+                            <h3 class="gdp-sublockup">Gestión de Personas</h3>
+                            <p class="text-muted">Acceso exclusivo para colaboradores</p>
+                        </div>
 
                     <!-- Mensajes de error -->
                     {% if messages %}
@@ -41,9 +46,10 @@
 
                         <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
                     </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
