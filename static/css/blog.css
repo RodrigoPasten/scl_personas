@@ -2129,3 +2129,29 @@ table tbody tr:nth-child(even) {
     padding-top: 1rem;
     border-top: 1px solid var(--gdp-gris-claro);
 }
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper .form-control {
+    padding-right: 75px; /* espacio para la palabra Mostrar/Ocultar */
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #56BADE; /* celeste principal de su manual de marca */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.password-toggle:hover {
+    color: #24425A; /* petróleo al pasar el mouse, para dar feedback */
+}
