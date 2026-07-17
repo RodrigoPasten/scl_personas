@@ -31,6 +31,12 @@ class Blog(models.Model):
     created_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)
 
+    notification_sent = models.BooleanField(
+        default=False,
+        editable=False,
+        verbose_name='Notificación enviada',
+    )
+
     def __str__(self):
         return self.title
 

@@ -9,7 +9,7 @@
         {% for post in featured_post %}
             {% if forloop.last %}
             <div class="hero-post">
-                <div class="hero-image-container" style="background-image: url('{{ post.featured_image.url }}');">
+                <div class="hero-image-container" style="background-image: url('{% if post.featured_image %}{{ post.featured_image.url }}{% endif %}');">
                     <div class="hero-overlay"></div>
                     <div class="container h-100">
                         <div class="row h-100 align-items-center">

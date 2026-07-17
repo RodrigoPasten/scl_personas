@@ -79,21 +79,19 @@ class EmployeeAdmin(admin.ModelAdmin):
     @admin.display(description='Acción')
     def crear_usuario_btn(self, obj):
         if obj.user:
-            url = reverse(
-                'ver_credenciales_empleado',
-                args=[obj.id],
-            )
+            url_credenciales = reverse('ver_credenciales_empleado', args=[obj.id])
+            url_reset = reverse('resetear_password_empleado', args=[obj.id])
 
             return format_html(
-                '<a class="button" href="{}">Ver credenciales</a>',
-                url,
+                '<a class="button" href="{}">Ver credenciales</a>&nbsp;'
+                '<a class="button" href="{}" '
+                'onclick="return confirm(\'¿Restablecer la contraseña de este trabajador a su RUT?\');">'
+                'Restablecer contraseña</a>',
+                url_credenciales,
+                url_reset,
             )
 
-        url = reverse(
-            'crear_usuario_empleado',
-            args=[obj.id],
-        )
-
+        url = reverse('crear_usuario_empleado', args=[obj.id])
         return format_html(
             '<a class="button" href="{}">Crear usuario</a>',
             url,
