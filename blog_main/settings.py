@@ -100,17 +100,30 @@ CKEDITOR_5_CONFIGS = {
         'language': 'es',
         'toolbar': [
             'heading', '|',
-            'bold', 'italic', 'link', '|',
-            'bulletedList', 'numberedList', '|',
-            'blockQuote', 'insertTable', 'imageUpload', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'fontColor', 'fontBackgroundColor', 'highlight', '|',
+            'alignment', '|',
+            'link', 'bulletedList', 'numberedList', 'todoList', '|',
+            'blockQuote', 'insertTable', 'imageUpload', 'mediaEmbed', '|',
+            'horizontalLine', 'removeFormat', '|',
             'undo', 'redo',
         ],
         'heading': {
             'options': [
                 {'model': 'paragraph', 'title': 'Párrafo', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Título', 'class': 'ck-heading_heading1'},
                 {'model': 'heading2', 'view': 'h2', 'title': 'Subtítulo', 'class': 'ck-heading_heading2'},
                 {'model': 'heading3', 'view': 'h3', 'title': 'Subtítulo menor', 'class': 'ck-heading_heading3'},
             ]
+        },
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', 'imageStyle:alignLeft',
+                'imageStyle:alignCenter', 'imageStyle:alignRight',
+            ],
+        },
+        'table': {
+            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells'],
         },
     },
 }
