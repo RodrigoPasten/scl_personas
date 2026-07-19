@@ -417,9 +417,8 @@ a:hover{
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, var(--azul-serving) 25%, var(--gdp-celeste) 95%);
+    background: linear-gradient(to right, rgba(36, 66, 90, 0.75) 25%, rgba(86, 186, 222, 0.45) 95%);
 }
-
 .hero-content {
     padding: 2rem 0;
     z-index: 10;
