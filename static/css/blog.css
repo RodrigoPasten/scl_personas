@@ -657,12 +657,12 @@ a:hover{
 @media (max-width: 768px) {
     .hero-image-container {
         height: auto;
-        min-height: 400px;
-        padding-bottom: 1.5rem;
+        min-height: auto;
+
     }
 
     .hero-content {
-        padding: 2rem 0;
+        padding: 2rem 1.5rem;
     }
 
     .hero-title {
@@ -671,6 +671,7 @@ a:hover{
 
     .hero-description {
         font-size: 1rem;
+        max-width: 100%;
     }
 
     .featured-post-image {
