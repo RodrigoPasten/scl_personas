@@ -96,13 +96,10 @@
             </div>
 
             <!-- Enlaces -->
-            <div class="col-md-4 text-md-end">
-                <nav class="footer-links">
-                    <a href="#" class="text-decoration-none text-light me-3">Términos</a>
-                    <a href="#" class="text-decoration-none text-light me-3">Privacidad</a>
-                    <a href="#" class="text-decoration-none text-light">Contacto</a>
-                </nav>
-            </div>
+            <nav class="footer-links">
+    <a href="{% url 'terminos' %}" class="text-decoration-none text-light me-3">Términos - </a>
+    <a href="{% url 'privacidad' %}" class="text-decoration-none text-light">Privacidad</a>
+</nav>
         </div>
     </div>
 </footer>

@@ -12,6 +12,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog_app.views.home, name='home'),
     path('categoria/', include('blog_app.urls')),
+path('terminos/', BlogsView.terminos, name='terminos'),
+    path('privacidad/', BlogsView.privacidad, name='privacidad'),
     path('<slug:slug>', blog_app.views.blogs, name='blogs'),
     # URLs de autenticación (NUEVAS)
     path('login/', BlogsView.login_view, name='login'),

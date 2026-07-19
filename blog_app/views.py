@@ -141,3 +141,12 @@ def cambiar_password(request):
         form = PasswordChangeForm(user=request.user)
 
     return render(request, 'cambiar_password.html', {'form': form})
+
+@login_required
+def terminos(request):
+    return render(request, 'terminos.html')
+
+
+@login_required
+def privacidad(request):
+    return render(request, 'privacidad.html')

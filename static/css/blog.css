@@ -89,7 +89,7 @@ a:hover{
 }
 /* Estilos para el Header Mejorado */
 .header {
-    background: linear-gradient(90deg, var(--azul-serving), var(--azul-degradado));
+    background: linear-gradient(200deg, var(--azul-serving), var(--azul-degradado));
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -242,7 +242,7 @@ a:hover{
 .logout-btn {
     display: flex;
     align-items: center;
-    color: var(--gdp-petroleo);
+    color: var(--gdp-celeste);
     font-size: 0.8rem;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -327,7 +327,7 @@ a:hover{
     }
 
     .navbar-collapse {
-        background-color: rgba(0, 73, 135, 0.95);
+        background-color: var(--gdp-petroleo);
         border-radius: 10px;
         padding: 1rem;
         margin-top: 1rem;
@@ -417,7 +417,7 @@ a:hover{
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, var(--azul-serving) 5%, rgba(0, 73, 135, 0.5) 100%);
+    background: linear-gradient(to right, var(--azul-serving) 25%, var(--gdp-celeste) 95%);
 }
 
 .hero-content {
@@ -476,7 +476,7 @@ a:hover{
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .hero-button:hover {
@@ -898,7 +898,7 @@ a:hover{
 }
 
 .comment-btn {
-    background: linear-gradient(135deg, var(--gdp-celeste-oscuro), var(--gdp-celeste-oscuro));
+    background: linear-gradient(135deg,var(--gdp-petroleo),  var(--gdp-celeste-oscuro));
     border: none;
     padding: 0.6rem 1.5rem;
     border-radius: 25px;
@@ -1357,7 +1357,7 @@ table tbody tr:nth-child(even) {
 
 /* Article Header */
 .article-header {
-    background: linear-gradient(180deg, var(--gdp-fondo-celeste) 0%, #ffffff 100%);
+    background: linear-gradient(160deg, var(--gdp-fondo-celeste) 0%, #ffffff 100%);
     padding: 3.5rem 0 2.5rem;
     text-align: center;
 }
