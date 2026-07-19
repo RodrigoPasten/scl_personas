@@ -643,11 +643,9 @@ a:hover{
 
 /* Responsive */
 @media (max-width: 992px) {
-    ...
-    .hero-image-container {
-        height: 450px;
+    .hero-title {
+        font-size: 2rem;
     }
-}
 
     .hero-image-container {
         height: 450px;
@@ -657,8 +655,7 @@ a:hover{
 @media (max-width: 768px) {
     .hero-image-container {
         height: auto;
-        min-height: auto;
-
+        min-height: 400px;
     }
 
     .hero-content {
@@ -672,6 +669,11 @@ a:hover{
     .hero-description {
         font-size: 1rem;
         max-width: 100%;
+    }
+
+    .hero-button {
+        width: 100%;
+        justify-content: center;
     }
 
     .featured-post-image {
